@@ -24,13 +24,17 @@ How the docs are written and kept up to date: [below](#writing-the-docs). Coding
 
 | File | Contents |
 |---|---|
-| [`BUILDING.md`](BUILDING.md) | Building and running: what to install, and a quick start on an emulator. |
+| [`BUILDING.md`](BUILDING.md) | Build instructions inherited from Luncher; see Rabbit TV's current validation status below. |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Modules, layers and the rules for where code goes. |
 | [`TESTING.md`](TESTING.md) | Test tiers: what goes where, how to run them, and in CI. |
 | [`INSTRUMENTED-TESTS.md`](INSTRUMENTED-TESTS.md) | The emulator tiers: running them, on which emulators, and writing them so that the device can't make them fail. |
 | [`EMULATORS.md`](EMULATORS.md) | Emulators and devices: the scripts that create and drive them, Luncher as the home screen on each Android version, and what the images do on their own. |
 | [`TRANSLATIONS.md`](TRANSLATIONS.md) | Translations: where the texts are, how they're worded, writing a string that translates well, adding a string or a language, checking a translation. |
 | [`RELEASING.md`](RELEASING.md) | Making a release: versions, the signing key, the release workflow, F-Droid. |
+| [`PRODUCT_SPEC.md`](PRODUCT_SPEC.md) | Rabbit TV scope, UX, acceptance criteria and pending product decisions. |
+| [`PERFORMANCE.md`](PERFORMANCE.md) | Initial performance budgets and the device measurement protocol. |
+| [`DEVICE_CHECKLIST.md`](DEVICE_CHECKLIST.md) | Reversible validation steps for a future TV session. |
+| [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md) | Upstream, asset and dependency license inventory and open checks. |
 | [`archive/`](archive/README.md) | How the current design was reached, not part of the build: the layout review on nine TV screens, and the removed launch screen, its final drawables and what it taught. |
 
 ## The repository
