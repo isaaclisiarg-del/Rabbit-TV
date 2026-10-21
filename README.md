@@ -1,48 +1,42 @@
 # Rabbit TV 🐇
 
-Launcher ligero para Android TV / Google TV, con estética **Lomiri Rabbit** y navegación exclusivamente con control remoto.
+Launcher ligero para Android TV / Google TV, con estética Lomiri Rabbit y navegación con control remoto.
 
-> Estado: preparación del proyecto. No se ha instalado ni modificado nada en el televisor.
+> Estado real: el código base de Luncher y los recursos de diseño Rabbit Sentinel V2 ya están en la rama `integration/luncher-base`. La implementación visual/funcional de Rabbit TV, la licencia de algunos recursos y el build siguen pendientes de validar. No se instaló ni modificó nada en la TV.
 
-## Diseño acordado
+## Producto previsto
 
-- **Inicio:** encabezado `Rabbit TV` y solo las aplicaciones que el usuario elija. Favoritas iniciales previstas: **YouTube, Spotify y Twitch**, si están instaladas. Sin mensaje «Bienvenido a casa», noticias, recomendaciones, anuncios ni sugerencias.
-- **Dock lateral:** tres destinos, exactamente **Inicio · Apps · Configuración**.
-- **Apps:** lista de aplicaciones TV instaladas, selección/deselección de favoritas y reordenación para la pantalla de inicio.
-- **Configuración:** sección **Personalización** para escoger fondo local, restaurar predeterminado y ajustar lo estrictamente necesario. La política de almacenamiento se definirá tras medir el espacio libre real de la TV.
-- **Identidad:** paleta Lomiri Rabbit (berenjena/violeta oscuro, superficies suaves, acento naranja), iconografía propia del ecosistema y mascota oficial del conejo de **Rabbit Sentinel**. Los recursos definitivos del conejo requieren integrar sus assets oficiales, no dibujar un sustituto.
-- **Fondos:** estética nocturna, cosmos violeta y naranja, ciudad iluminada y conejo descansando. Se prioriza una imagen 16:9 optimizada para pantalla y consumo de memoria.
+- **Inicio:** encabezado Rabbit TV y solo las apps favoritas que el usuario elija. YouTube, Spotify y Twitch son candidatas iniciales, si están instaladas. Sin bienvenida, noticias, recomendaciones ni anuncios.
+- **Dock lateral:** tres destinos: Inicio · Apps · Configuración.
+- **Apps:** lista de aplicaciones TV disponibles, selección y reordenación de favoritas.
+- **Configuración:** Personalización para elegir fondo local y restaurar el fondo predeterminado. La política de almacenamiento queda pendiente de medir el espacio real de la TV.
+- **Identidad:** berenjena/violeta oscuro, superficies suaves y acento naranja. Los recursos Rabbit Sentinel V2 importados se describen como redibujos vectoriales de una lámina de referencia; comparar con el original y confirmar los derechos antes de empaquetarlos.
+- **Fondo:** estética nocturna 16:9 con cosmos violeta/naranja, ciudad iluminada y conejo descansando. El arte aprobado aún no está disponible en el repo.
 
-## Base técnica
+La [especificación del producto](docs/PRODUCT_SPEC.md) detalla alcance, aceptación y decisiones abiertas.
 
-La base elegida es [Luncher](https://github.com/CVasilakis/luncher), de Christoforos Vasilakis, distribuida bajo la **licencia MIT**. Los avisos de derechos de autor y la licencia original deben conservarse en toda copia o redistribución que contenga su código.
+## Base y estado técnico
 
-Se conservarán los principios que hacen ligera la interfaz: **Kotlin nativo + Android Views**, caché de banners redimensionados, reutilización de tarjetas, procesamiento secundario con prioridades, actualizaciones incrementales y ausencia de servicios permanentes innecesarios.
+La base es [Luncher](https://github.com/CVasilakis/luncher), de Christoforos Vasilakis, bajo MIT. La licencia MIT original está presente en la raíz. Luncher aporta Kotlin nativo, Android Views y una arquitectura modular; el cambio de identidad no equivale todavía a implementar la experiencia Rabbit TV.
 
-La interfaz inicial no requiere Jetpack Compose ni Flutter. Pueden valorarse posteriormente si se demuestra que no empeoran la experiencia en el hardware real.
+Estado comprobado de la rama:
 
-## Prioridad: fluidez
+- [x] Código base Luncher importado y rama existente.
+- [x] Recursos y notas de Rabbit Sentinel V2 presentes.
+- [x] Documentación de producto, rendimiento, checklist de TV y atribuciones añadida.
+- [ ] Validación de build: pendiente; no existe resultado de CI para esta rama y no se pudo clonar el repo en este entorno.
+- [ ] Confirmar origen/licencia de Rabbit Sentinel V2 y del fondo definitivo.
+- [ ] Implementar y validar en emulador la experiencia de Inicio, Apps y Configuración de Rabbit TV.
+- [ ] Pruebas con TV física; todavía no se conectó ni instaló nada.
 
-1. Al abrir Inicio, cargar primero fondo y favoritas ya preparadas.
-2. Evitar lectura de disco, decodificación de imágenes y llamadas lentas al PackageManager durante los cambios de foco.
-3. Cambiar de foco mediante una animación mínima de escala/contorno, de forma que el procesamiento permanezca dentro del presupuesto del fotograma.
-4. Preparar fondos a la resolución lógica necesaria; no mantener originales enormes en memoria.
-5. Mantener Inicio reutilizable al regresar desde otra app y no hacer trabajo mientras no esté visible.
-6. Medir arranque frío/caliente, memoria y jank con la TV real. Los 60 FPS a 60 Hz y arranque subsegundo son **objetivos, no garantías**.
+## Fluidez
 
-## Instalación y seguridad
+Las métricas propuestas son presupuestos iniciales, todavía no mediciones: respuesta de foco p95 ≤100 ms, primer frame tras arranque frío ≤2 s, retorno caliente ≤1 s, PSS en reposo ≤100 MiB y ≤150 MiB con 12 favoritas. El presupuesto de frame depende de la frecuencia de la TV.
 
-El APK se instalará y probará por **ADB** cuando el usuario esté frente a la TV. Instalar no equivale a reemplazar permanentemente Home: primero se comprobará qué launchers y qué restricciones impone la versión del fabricante. **No deshabilitar launchers ni servicios de Google hasta verificar una forma reversible de volver al inicio original.** Proteger la compatibilidad de YouTube, YouTube Music y Spotify.
+Ver [requisitos de rendimiento](docs/PERFORMANCE.md) y su protocolo de medición.
 
-## Plan
+## TV y licencias
 
-- [ ] Importar y fijar la versión de Luncher seleccionada, preservando `LICENSE`.
-- [ ] Renombrar aplicación/namespace a Rabbit TV sin romper las actividades Home y Leanback.
-- [ ] Simplificar inicio, dejando encabezado, favoritas y dock de tres entradas.
-- [ ] Pantalla Apps con selección y orden de favoritas.
-- [ ] Configuración > Personalización > fondo local y restaurar fondo.
-- [ ] Importar iconografía real y conejo de Rabbit Sentinel.
-- [ ] Compilar APK de depuración, probar navegación y retorno desde apps.
-- [ ] Medir en la TV, optimizar y generar APK Release.
+La [lista de validación de TV](docs/DEVICE_CHECKLIST.md) reserva la instalación para una sesión futura autorizada y reversible. No configurar Rabbit TV como Home por defecto ni deshabilitar servicios del fabricante/Google durante la prueba inicial.
 
-Documentación ampliada: `docs/PRODUCT_SPEC.md`, `docs/PERFORMANCE.md` y `docs/DEVICE_CHECKLIST.md`.
+La [matriz de atribuciones](docs/ATTRIBUTIONS.md) registra MIT para Luncher y Apache-2.0/NOTICE para dibujos AOSP incluidos en la base. La procedencia/licencia de la lámina Rabbit Sentinel V2 y del fondo sigue sin confirmarse; mantener esos recursos fuera de un paquete distribuible hasta cerrar esa revisión.
