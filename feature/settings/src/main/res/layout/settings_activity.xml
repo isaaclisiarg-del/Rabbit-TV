@@ -9,6 +9,7 @@
     android:padding="@dimen/settings_panel_padding">
 
     <TextView
+        android:id="@+id/settings_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/settings_title_gap"
@@ -17,9 +18,8 @@
         android:textColor="@color/text_primary"
         android:textSize="@dimen/settings_title_text" />
 
-    <!-- SettingsActivity adds a settings_entry for each entry of settingsMenu, in order, and sets
-         the height: all of them, or on a short screen as many as fit, ending on half an entry, and
-         they scroll as the focus moves. -->
+    <!-- The settings activities add entries in order and size this list to the available screen;
+         it scrolls as D-pad focus moves. -->
     <ScrollView
         android:id="@+id/settings_entries_scroll"
         android:layout_width="match_parent"

@@ -157,4 +157,17 @@
         <item quantity="one">Πάρα πολλές εικόνες: έως <xliff:g id="most" example="1">%d</xliff:g> εικόνα μπορεί να προστεθεί τη φορά. Μοιραστείτε λιγότερες και μετά δοκιμάστε ξανά.</item>
         <item quantity="other">Πάρα πολλές εικόνες: έως <xliff:g id="most" example="100">%d</xliff:g> εικόνες μπορούν να προστεθούν τη φορά. Μοιραστείτε λιγότερες και μετά δοκιμάστε ξανά.</item>
     </plurals>
+    <string name="settings_home_screen">Αρχική οθόνη</string>
+    <string name="settings_device_settings">Ρυθμίσεις συσκευής</string>
+    <string name="home_override_title">Αρχική οθόνη</string>
+    <string name="home_override_description">Το Rabbit TV μπορεί να εμφανιστεί όταν ανοίγει το Google TV Home. Απαιτείται να ενεργοποιήσετε χειροκίνητα την υπηρεσία προσβασιμότητας. Παρακολουθεί μόνο τα συμβάντα παραθύρου του Google TV Home και δεν διαβάζει κείμενο ή περιεχόμενο άλλων εφαρμογών.</string>
+    <string name="home_override_enable">Χρήση Rabbit TV ως αρχικής οθόνης</string>
+    <string name="home_override_status_title">Κατάσταση υπηρεσίας</string>
+    <string name="home_override_configure_accessibility">Ρύθμιση προσβασιμότητας</string>
+    <string name="home_override_restore">Επαναφορά αρχικής οθόνης</string>
+    <string name="home_override_service_disabled">Η υπηρεσία προσβασιμότητας είναι απενεργοποιημένη.</string>
+    <string name="home_override_permission_pending">Εκκρεμεί άδεια: ενεργοποιήστε το Rabbit TV στις ρυθμίσεις προσβασιμότητας.</string>
+    <string name="home_override_service_enabled_off">Η υπηρεσία είναι ενεργοποιημένη· η αντικατάσταση είναι απενεργοποιημένη.</string>
+    <string name="home_override_unverified">Η υπηρεσία είναι ενεργοποιημένη. Η αντικατάσταση είναι ενεργή· η λειτουργία δεν έχει επαληθευτεί σε αυτή την τηλεόραση.</string>
+    <string name="home_override_restored">Η αντικατάσταση απενεργοποιήθηκε. Το Google TV Home διατηρεί τον έλεγχο του κουμπιού Αρχικής οθόνης.</string>
 </resources>

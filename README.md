@@ -9,7 +9,7 @@ Launcher ligero para Android TV / Google TV, con estética Lomiri Rabbit y naveg
 - **Inicio:** encabezado Rabbit TV y solo las apps favoritas que el usuario elija. YouTube, Spotify y Twitch son candidatas iniciales, si están instaladas. Sin bienvenida, noticias, recomendaciones ni anuncios.
 - **Dock lateral:** tres destinos: Inicio · Apps · Configuración.
 - **Apps:** lista de aplicaciones TV disponibles, selección y reordenación de favoritas.
-- **Configuración:** Personalización para elegir fondo local y restaurar el fondo predeterminado. La política de almacenamiento queda pendiente de medir el espacio real de la TV.
+- **Configuración:** Personalización para elegir fondo local y restaurar el fondo predeterminado; Sistema → Pantalla de inicio ofrece una sustitución opcional de Google TV Home mediante accesibilidad, aún sin verificar en hardware.
 - **Identidad:** berenjena/violeta oscuro, superficies suaves, acento naranja e iconografía Rabbit Sentinel V2 disponible en el repositorio.
 - **Fondo:** el editor admite imágenes locales y las prepara al tamaño de pantalla. El arte nocturno 16:9 aprobado con ciudad espacial y conejo sigue pendiente; el color berenjena liso es temporal.
 

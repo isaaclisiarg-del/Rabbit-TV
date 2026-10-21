@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RabbitSettingsEntry">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/settings_entry_height</item>
+        <item name="android:background">@drawable/entry_background</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/settings_entry_padding</item>
+        <item name="android:paddingEnd">@dimen/settings_entry_padding</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/settings_entry_text</item>
+    </style>
+</resources>

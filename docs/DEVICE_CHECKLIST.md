@@ -73,7 +73,17 @@ Este checklist es para una sesión futura, con el usuario presente y después de
 - [ ] Revisar TalkBack/escala de texto si el sistema lo soporta.
 - [ ] Adjuntar SHA, build variant, versión del sistema, resumen y resultado.
 
-## 8. Recuperación y cierre
+## 8. Sustitución opcional de Google TV Home
+
+- [ ] Habilitar únicamente desde Rabbit TV → Configuración → Sistema → Pantalla de inicio.
+- [ ] Activar «Usar Rabbit TV como inicio» y habilitar Rabbit TV manualmente en Ajustes → Accesibilidad.
+- [ ] Probar Home desde YouTube, Spotify y otras apps; confirmar que no se interrumpe la reproducción ni se redirigen ajustes o diálogos.
+- [ ] Repetir después de reiniciar; confirmar Chromecast, Wi-Fi, HDMI y el control remoto.
+- [ ] Pulsar «Restaurar inicio original» y confirmar que vuelve a abrirse Google TV Home.
+- [ ] Mantener habilitados LauncherX (com.google.android.apps.tv.launcherx), SetupWraith (com.google.android.tungsten.setupwraith) y Google MediaShell (com.google.android.apps.mediashell).
+- [ ] No declarar la sustitución operativa sin medirla en el televisor. El inicio de una Activity desde un servicio en segundo plano está sujeto a las restricciones y excepciones de Android; el resultado puede variar según el firmware. Si Rabbit TV no pasa al frente, registrar el mensaje de ActivityTaskManager/Logcat y dejar la sustitución desactivada.
+
+## 9. Recuperación y cierre
 
 - [ ] Volver a seleccionar launcher original desde Ajustes; comprobar tecla Home.
 - [ ] Confirmar que no se modificó servicio del sistema ni app del fabricante.

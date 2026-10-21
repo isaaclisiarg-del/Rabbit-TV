@@ -13,4 +13,9 @@
     <string name="home_wallpaper_screen_changed">جارٍ ملاءمة الخلفية لهذه الشاشة…</string>
     <string name="home_wallpaper_outdated">جارٍ تحديث الخلفية…</string>
     <string name="home_wallpaper_saving">جارٍ معالجة الخلفية…</string>
+    <string name="rabbit_home_override_service_name">Rabbit TV · استبدال الشاشة الرئيسية</string>
+    <string name="rabbit_home_override_service_description">يراقب ظهور واجهة Google TV الرئيسية ويمكنه فتح Rabbit TV عند تفعيل الاستبدال.</string>
+    <string name="rabbit_tv_title">Rabbit TV</string>
+    <string name="rabbit_tv_apps_title">Apps</string>
+    <string name="rabbit_tv_apps_hint">OK: أضف أو أزل المفضلة · Home: اضغط مطولًا على OK لإعادة ترتيب المفضلة</string>
 </resources>

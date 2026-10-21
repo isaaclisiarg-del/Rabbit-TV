@@ -1,19 +1,16 @@
 package com.luncher.launcher.settings
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.luncher.domain.settings.SettingsEntry
 
 /**
- * The settings panel: a floating window over the home screen that lists the entries of
- * [settingsMenu]. Back closes it, as any activity, and the home screen's focus is where it was.
+ * The settings panel: a floating window over the home screen with personalization and system
+ * options. Back closes it, as any activity, and the home screen's focus is where it was.
  *
  * What an entry shows and does is decided here, per kind of entry, in [label] and [open]; which
  * entries exist and in which group is the domain's decision.
@@ -26,7 +23,7 @@ class SettingsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
         entries = findViewById(R.id.settings_entries)
-        show(listOf(SettingsEntry.Appearance))
+        show(listOf(SettingsEntry.Appearance, SettingsEntry.SystemSettings))
         // The entries scroll on a screen too short for them all.
         val scroll = findViewById<View>(R.id.settings_entries_scroll)
         scroll.layoutParams.height = 0
@@ -57,7 +54,7 @@ class SettingsActivity : Activity() {
     private fun open(entry: SettingsEntry) = when (entry) {
         SettingsEntry.HideApps -> openOwnPanel(Intent(this, HideAppsActivity::class.java))
         SettingsEntry.Appearance -> openOwnPanel(Intent(this, AppearanceActivity::class.java))
-        SettingsEntry.SystemSettings -> openSystemSettings()
+        SettingsEntry.SystemSettings -> openOwnPanel(Intent(this, SystemSettingsActivity::class.java))
     }
 
     /**
@@ -75,12 +72,4 @@ class SettingsActivity : Activity() {
         window.attributes = window.attributes.apply { alpha = if (shown) 1f else 0f }
     }
 
-    /** In a task of its own, like any other app; Back from it returns to this panel. */
-    private fun openSystemSettings() {
-        try {
-            startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, R.string.settings_system_unavailable, Toast.LENGTH_SHORT).show()
-        }
-    }
 }

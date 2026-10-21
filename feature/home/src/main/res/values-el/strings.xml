@@ -12,4 +12,9 @@
     <string name="home_wallpaper_screen_changed">Προσαρμογή του φόντου σε αυτή την οθόνη…</string>
     <string name="home_wallpaper_outdated">Ενημέρωση του φόντου…</string>
     <string name="home_wallpaper_saving">Επεξεργασία φόντου…</string>
+    <string name="rabbit_home_override_service_name">Rabbit TV · Αντικατάσταση αρχικής οθόνης</string>
+    <string name="rabbit_home_override_service_description">Εντοπίζει πότε εμφανίζεται η αρχική οθόνη του Google TV και μπορεί να ανοίξει το Rabbit TV αν ενεργοποιήσετε την αντικατάσταση.</string>
+    <string name="rabbit_tv_title">Rabbit TV</string>
+    <string name="rabbit_tv_apps_title">Apps</string>
+    <string name="rabbit_tv_apps_hint">OK: προσθήκη ή αφαίρεση αγαπημένου · Home: κρατήστε πατημένο το OK για αναδιάταξη</string>
 </resources>

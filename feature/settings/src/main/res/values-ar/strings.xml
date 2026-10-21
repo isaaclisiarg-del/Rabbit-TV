@@ -217,4 +217,17 @@
         <item quantity="many">صور كثيرة جدًا: يمكن إضافة حتى <xliff:g id="most" example="11">%d</xliff:g> صورة في المرة الواحدة. شارك عددًا أقل، ثم حاول مرة أخرى.</item>
         <item quantity="other">صور كثيرة جدًا: يمكن إضافة حتى <xliff:g id="most" example="100">%d</xliff:g> صورة في المرة الواحدة. شارك عددًا أقل، ثم حاول مرة أخرى.</item>
     </plurals>
+    <string name="settings_home_screen">الشاشة الرئيسية</string>
+    <string name="settings_device_settings">إعدادات الجهاز</string>
+    <string name="home_override_title">الشاشة الرئيسية</string>
+    <string name="home_override_description">يمكن لـ Rabbit TV الظهور عند فتح Google TV Home. يلزم تفعيل خدمة إمكانية الوصول يدويًا. تراقب أحداث النوافذ في Google TV Home فقط ولا تقرأ النص أو المحتوى من التطبيقات الأخرى.</string>
+    <string name="home_override_enable">استخدام Rabbit TV كشاشة رئيسية</string>
+    <string name="home_override_status_title">حالة الخدمة</string>
+    <string name="home_override_configure_accessibility">إعداد إمكانية الوصول</string>
+    <string name="home_override_restore">استعادة الشاشة الرئيسية الأصلية</string>
+    <string name="home_override_service_disabled">خدمة إمكانية الوصول غير مفعّلة.</string>
+    <string name="home_override_permission_pending">الإذن مطلوب: فعّل Rabbit TV في إعدادات إمكانية الوصول.</string>
+    <string name="home_override_service_enabled_off">الخدمة مفعّلة؛ الاستبدال متوقف.</string>
+    <string name="home_override_unverified">الخدمة مفعّلة. الاستبدال مفعّل؛ لم يتم التحقق من عمله على هذا التلفاز.</string>
+    <string name="home_override_restored">تم إيقاف الاستبدال. يحتفظ Google TV Home بالتحكم في زر الشاشة الرئيسية.</string>
 </resources>
