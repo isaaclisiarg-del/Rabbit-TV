@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#FF101418</color>
-    <color name="accent">#FFFF7043</color>
+    <color name="background">#FF211822</color>
+    <color name="accent">#FFFF7449</color>
     <color name="text_primary">#FFFFFFFF</color>
     <color name="text_secondary">#B3FFFFFF</color>
     <!-- A panel over a screen (the settings panels, the picture dialogs, WorkingDialog), and the
          fill of its focused entry. -->
-    <color name="panel">#FF1C232B</color>
-    <color name="entry_focused">#1FFFFFFF</color>
+    <color name="panel">#FF312334</color>
+    <color name="entry_focused">#29FF7449</color>
     <!-- The edge around what's drawn on the wallpaper (WallpaperOutline): the background's color
          at 80 %, so it doesn't show on the plain background. -->
-    <color name="wallpaper_outline">#CC101418</color>
+    <color name="wallpaper_outline">#CC211822</color>
 </resources>

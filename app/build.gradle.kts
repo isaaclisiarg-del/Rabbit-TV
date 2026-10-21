@@ -9,13 +9,13 @@ android {
     namespace = "com.luncher.launcher"
 
     defaultConfig {
-        applicationId = "com.luncher.launcher"
+        applicationId = "com.rabbit.tv"
         // The version, changed by hand before each release (docs/RELEASING.md#versions). Both are
         // written out, as literals and before any other line naming them: F-Droid finds a
         // release's version by reading this file. The check after the android block keeps them
         // in step.
-        versionCode = 3_000
-        versionName = "0.3.0"
+        versionCode = 1_000
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // The system tier (UI Automator, the system/ package) runs only from API 24; below that
@@ -34,7 +34,7 @@ android {
     }
 
     buildTypes {
-        // A debug build is an app of its own, "Luncher (debug)" (src/debug/), so it installs next
+        // A debug build is an app of its own, "Rabbit TV (debug)" (src/debug/), so it installs next
         // to a release, which is signed with another key.
         debug {
             applicationIdSuffix = ".debug"

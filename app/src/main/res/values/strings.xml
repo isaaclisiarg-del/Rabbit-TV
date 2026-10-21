@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- A name, the same in every language. -->
-    <string name="app_name" translatable="false">Luncher</string>
-</resources>
+<resources><string name="app_name" translatable="false">Rabbit TV</string></resources>
