@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- A panel's corners; the focus frame of an entry in it (entry_background). -->
+    <dimen name="panel_corner">12dp</dimen>
+    <dimen name="entry_frame">3dp</dimen>
+    <dimen name="entry_corner">8dp</dimen>
+    <!-- WorkingDialog: the panel's padding, its spinning wheel and the gap to the message, the
+         message's size and width at most. -->
+    <dimen name="working_padding">32dp</dimen>
+    <dimen name="working_spinner">40dp</dimen>
+    <dimen name="working_gap">24dp</dimen>
+    <dimen name="working_text">20sp</dimen>
+    <dimen name="working_text_width">400dp</dimen>
+    <!-- Its Cancel: as tall as a settings panel's entry, below the message. -->
+    <dimen name="working_entry_height">56dp</dimen>
+    <dimen name="working_entry_padding">16dp</dimen>
+    <dimen name="working_entry_gap">24dp</dimen>
+    <!-- How far the edge around what's drawn on the wallpaper reaches past the shape
+         (WallpaperOutline). The home screen's gear (feature/home's home_settings.xml) draws twice
+         this, in its own units. -->
+    <dimen name="wallpaper_outline">0.75dp</dimen>
+</resources>

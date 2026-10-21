@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Every background colour Android may show for a screen is set here, dark, rather than
+         left to Theme.DeviceDefault, which device makers may restyle: never a white screen,
+         ThemesTest checks it. windowSplashScreenBackground is the splash screen's from
+         Android 12 on, which on TV is only that colour. -->
+    <style name="Theme.Luncher" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <!-- No starting window up to Android 11: the previous screen stays until the home screen
+             draws, as it does from Android 12 on (ui/README.md#while-luncher-starts). -->
+        <item name="android:windowDisablePreview">true</item>
+        <!-- Texts line up at the start of their view, the left on the home screen, which stays
+             left to right, and the right in a mirrored one, whatever their own direction.
+             Otherwise each would follow its own: an Arabic arrange title at the right, against
+             the hint, or English entries at the left of a mirrored settings panel. -->
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <!-- WorkingDialog: a floating panel like the settings panel, over the dimmed screen. -->
+    <style name="Theme.Luncher.Working" parent="@android:style/Theme.DeviceDefault.Dialog.NoActionBar">
+        <item name="android:windowBackground">@drawable/panel_background</item>
+        <item name="android:colorBackground">@color/panel</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:textAlignment">viewStart</item>
+        <!-- The dialog theme's minimum width is a share of the screen; the layout sets the width. -->
+        <item name="android:windowMinWidthMajor">0dp</item>
+        <item name="android:windowMinWidthMinor">0dp</item>
+    </style>
+</resources>
