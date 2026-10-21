@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lint's exceptions for this module's files, each with its reason; those for every module are in
+     the root lint.xml. -->
+<lint>
+    <!-- A vector drawable larger than 200x200 dp is drawn into a bitmap of the size it's shown at.
+         The banner is 320x180 dp, the size Android TV asks for; launchers draw it once into a
+         tile. -->
+    <issue id="VectorRaster">
+        <ignore path="src/main/res/drawable/banner.xml" />
+        <ignore path="src/debug/res/drawable/banner.xml" />
+    </issue>
+
+    <!-- A monochrome icon is for themed icons, which phone launchers draw; Luncher is TV-only. -->
+    <issue id="MonochromeLauncherIcon" severity="ignore" />
+</lint>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- TV-only app: require leanback, don't require a touchscreen. -->
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <!-- The activities are declared in the feature modules' manifests, which the build merges
+         into this one; here, what makes the home screen's activity Luncher's entry point. -->
+    <application
+        android:name=".LuncherApplication"
+        android:allowBackup="true"
+        android:banner="@drawable/banner"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Luncher">
+
+        <activity
+            android:name="com.luncher.launcher.home.HomeActivity"
+            android:exported="true">
+
+            <!-- Registers the app as a home screen (launcher). -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- Also listed as a normal TV app, handy while developing; and how a share opens
+                 Luncher's home screen under its window (SharePictureActivity). -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Luncher among the apps a picture can be shared with ("Share", "Set as"), the way into
+             its picture library; SEND_MULTIPLE for several at once. Not VIEW ("Open with"):
+             Luncher would be offered whenever any picture is opened. -->
+        <activity
+            android:name="com.luncher.launcher.settings.SharePictureActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ATTACH_DATA" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
