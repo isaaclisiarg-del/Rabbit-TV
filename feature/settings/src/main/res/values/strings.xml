@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The settings screens' texts: the panels, the appearance editor and the picture library. Each
+     translation, in values-<language>/, has every string here. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- The settings panel's title. -->
+    <string name="settings_title">Settings</string>
+    <!-- The entry that opens the list of apps to hide or show, and that list's title. -->
+    <string name="settings_hide_apps">Hide apps</string>
+    <!-- After an app's name in that list, while the app is hidden. -->
+    <string name="settings_hidden">Hidden</string>
+    <!-- Shown in that list when the device has no TV apps. -->
+    <string name="settings_no_apps">No TV apps installed</string>
+    <!-- The entry that opens the editor of the home screen's look, and that editor's title. -->
+    <string name="settings_appearance">Appearance</string>
+    <!-- In the appearance editor: the title of the options for the home screen's app tiles. -->
+    <string name="settings_appearance_tiles">Tiles</string>
+    <!-- In the appearance editor: the title of the options for the time and the date, in the bar
+         at the top of the home screen, which has the settings gear too. -->
+    <string name="settings_appearance_top_bar">Time and date</string>
+    <!-- An option: where the rows of app tiles go in the height of the home screen, below the top
+         bar. Its values are Top, Center and Bottom. -->
+    <string name="settings_appearance_vertical_alignment">Vertical alignment</string>
+    <!-- Its values. -->
+    <string name="settings_appearance_top">Top</string>
+    <string name="settings_appearance_bottom">Bottom</string>
+    <!-- A value of both alignments: the rows in the middle of the height, or the row of tiles that
+         isn't full in the middle of the width. -->
+    <string name="settings_appearance_center">Center</string>
+    <!-- An option: where the row of app tiles that isn't full goes in the width of the home screen
+         (the full rows are as wide as the screen). Its values are Left, Center and Right. -->
+    <string name="settings_appearance_horizontal_alignment">Horizontal alignment</string>
+    <!-- An option, with the tiles centered or at the bottom: the bottom row of tiles is always
+         full, and the row that isn't goes at the top. Its values are On and Off. -->
+    <string name="settings_appearance_full_bottom_row">Full bottom row</string>
+    <!-- An option: how round the corners of the app tiles are. -->
+    <string name="settings_appearance_corner_radius">Corner radius</string>
+    <!-- Its values: the radius in dp, the unit of size Android uses, 0 for square corners. -->
+    <string name="settings_appearance_radius_dp"><xliff:g id="radius" example="8">%1$d</xliff:g> dp</string>
+    <!-- Its last value: the tiles' ends fully round, half circles, their top and bottom straight,
+         like a pill or a capsule. -->
+    <string name="settings_appearance_pill">Pill</string>
+    <!-- An option: whether the top bar shows the time of day. -->
+    <string name="settings_appearance_time">Time</string>
+    <!-- An option: whether the top bar shows the date. -->
+    <string name="settings_appearance_date">Date</string>
+    <!-- Values of the two options above. -->
+    <string name="settings_appearance_shown">Shown</string>
+    <string name="settings_appearance_hidden">Hidden</string>
+    <!-- An option: which side of the top bar the time and the date are on; the settings gear goes
+         on the other. Its values are Left and Right. -->
+    <string name="settings_appearance_clock_side">Side</string>
+    <!-- Values of the option above and of the horizontal alignment: the screen's left and right,
+         in every language. -->
+    <string name="settings_appearance_left">Left</string>
+    <string name="settings_appearance_right">Right</string>
+    <!-- An option: in which order the time and the date are, side by side, left to right in every
+         language. -->
+    <string name="settings_appearance_time_side">Order</string>
+    <!-- Its values: the time on the left of the date, or the date on the left of the time. In a
+         right-to-left language, where "first" would mean the right, say which is on the left. -->
+    <string name="settings_appearance_time_first">Time first</string>
+    <string name="settings_appearance_date_first">Date first</string>
+    <!-- In the appearance editor: the entry of the home screen's background, a picture (a
+         wallpaper) or none, which opens the background editor; also the entry, in the window
+         after another app shared a picture, that opens it with that picture. -->
+    <string name="settings_appearance_background">Background</string>
+    <!-- Beside the Background entry: the name of a picture that has none. -->
+    <string name="settings_appearance_picture">Picture</string>
+    <!-- Beside the Background entry while the background has no picture. -->
+    <string name="settings_appearance_no_picture">None</string>
+    <!-- An option: how the picture covers the screen. Its values: Fill (keeping its shape, what
+         doesn't fit cut off) and Stretch (all of it, its shape changed to the screen's). -->
+    <string name="settings_appearance_fit">Fit</string>
+    <string name="settings_appearance_fill">Fill</string>
+    <string name="settings_appearance_stretch">Stretch</string>
+    <!-- An option, while the picture fills the screen: which part of it shows. Its values are
+         Center, Top, Bottom, Left and Right. -->
+    <string name="settings_appearance_position">Position</string>
+    <!-- An option: how much darker the picture is drawn, so the tiles stand out. Its values are
+         Off (settings_appearance_off) and the three below, 20, 40 and 60 percent darker: the words
+         of Blur's values, strings of their own for languages where they agree with the option's
+         name. -->
+    <string name="settings_appearance_dim">Dim</string>
+    <string name="settings_appearance_dim_light">Light</string>
+    <string name="settings_appearance_dim_medium">Medium</string>
+    <string name="settings_appearance_dim_strong">Strong</string>
+    <!-- An option: how blurred the picture is drawn. Its values are Off, Light, Medium and Strong. -->
+    <string name="settings_appearance_blur">Blur</string>
+    <string name="settings_appearance_light">Light</string>
+    <string name="settings_appearance_medium">Medium</string>
+    <string name="settings_appearance_strong">Strong</string>
+    <!-- Values of an option that's on or off. -->
+    <string name="settings_appearance_on">On</string>
+    <string name="settings_appearance_off">Off</string>
+    <!-- Around an option's value: Left steps to the previous value, Right to the next. -->
+    <string name="settings_appearance_arrow_previous" translatable="false">‹</string>
+    <string name="settings_appearance_arrow_next" translatable="false">›</string>
+    <!-- The last entry of the appearance editor: puts every option back to how it was at first. -->
+    <string name="settings_appearance_reset">Reset to defaults</string>
+    <!-- The entry that opens the device's own settings. -->
+    <string name="settings_system">System settings</string>
+    <!-- A message, when the device has no settings app to open. -->
+    <string name="settings_system_unavailable">No settings app on this device</string>
+
+    <!-- The background editor (its title is settings_appearance_background): at the top of its
+         pictures, how to rename or delete one; OK is the remote's button. -->
+    <string name="settings_background_hint">Hold OK on a picture to rename or delete it</string>
+    <!-- Its last entry: stores the picture and options chosen, which the editor only shows until then. -->
+    <string name="settings_background_save">Save</string>
+    <!-- Beside Save, in red: deletes every picture of the library, after a question. -->
+    <string name="settings_background_delete_all">Delete all</string>
+    <!-- That question; below it, what deleting them does and doesn't do, with how many; then the
+         same when one of them is the background's picture, which the home screen loses. -->
+    <string name="settings_background_delete_all_question">Delete all pictures?</string>
+    <plurals name="settings_background_delete_all_text">
+        <item quantity="one">The picture is deleted from Luncher\'s pictures only.</item>
+        <item quantity="other">The <xliff:g id="count" example="9">%d</xliff:g> pictures are deleted from Luncher\'s pictures only.</item>
+    </plurals>
+    <plurals name="settings_background_delete_all_text_background">
+        <item quantity="one">Used as the background: the home screen will have no picture. The picture is deleted from Luncher\'s pictures only.</item>
+        <item quantity="other">One is used as the background: the home screen will have no picture. The <xliff:g id="count" example="9">%d</xliff:g> pictures are deleted from Luncher\'s pictures only.</item>
+    </plurals>
+    <!-- In a window over the editor while the wallpaper is drawn after Save, which takes a moment. -->
+    <string name="settings_background_applying">Processing background…</string>
+    <!-- In a window over the background editor as it opens, while its pictures are prepared to be
+         shown quickly (made once, again only after the TV changes its resolution or an update):
+         for one picture, then for several, which one of how many. -->
+    <string name="settings_background_preparing">Preparing the picture…</string>
+    <string name="settings_background_preparing_count">Preparing picture <xliff:g id="number" example="3">%1$d</xliff:g> of <xliff:g id="total" example="10">%2$d</xliff:g>…</string>
+    <!-- Beside the picture chosen. -->
+    <string name="settings_background_chosen" translatable="false">✓</string>
+
+    <!-- The window over the home screen after another app shared a picture with Luncher: its
+         title while the picture is added, then once it's in Luncher's pictures; below it, the
+         picture's name, and entries to use it (Background, settings_appearance_background).
+         When Luncher's pictures had it already, settings_pictures_already, its name and OK.
+         Several pictures shared: the strings that follow. -->
+    <string name="settings_received_adding">Adding the picture…</string>
+    <string name="settings_received_saved">Picture added</string>
+    <!-- Its title while several pictures are added: which one of how many. -->
+    <string name="settings_received_adding_count">Adding picture <xliff:g id="number" example="3">%1$d</xliff:g> of <xliff:g id="total" example="10">%2$d</xliff:g>…</string>
+    <!-- Then, for several pictures, its title: how many were added to Luncher's pictures now. -->
+    <plurals name="settings_received_saved_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> picture added</item>
+        <item quantity="other"><xliff:g id="count" example="9">%d</xliff:g> pictures added</item>
+    </plurals>
+    <!-- The title instead when none of them was added. -->
+    <string name="settings_received_none_added">Pictures not added</string>
+    <!-- Below the title, a line for each reason some pictures weren't added, with how many, in
+         this order; a reason none has isn't shown. Each line counts pictures, e.g. "2 already in
+         Luncher's pictures", "1 not a picture, or damaged". -->
+    <plurals name="settings_received_already_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> already in Luncher\'s pictures</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> already in Luncher\'s pictures</item>
+    </plurals>
+    <plurals name="settings_received_not_a_picture_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> not a picture, or damaged</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> not pictures, or damaged</item>
+    </plurals>
+    <plurals name="settings_received_unsupported_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> in a format this TV can\'t show</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> in a format this TV can\'t show</item>
+    </plurals>
+    <!-- %2$s is the largest file a picture can be, e.g. 50 MB. -->
+    <plurals name="settings_received_too_large_bytes_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> larger than <xliff:g id="size" example="50 MB">%2$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> larger than <xliff:g id="size" example="50 MB">%2$s</xliff:g></item>
+    </plurals>
+    <!-- %2$d is the most pixels a picture can have, in millions, 64; the form follows the count. -->
+    <plurals name="settings_received_too_large_pixels_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> larger than <xliff:g id="megapixels" example="64">%2$d</xliff:g> megapixels</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> larger than <xliff:g id="megapixels" example="64">%2$d</xliff:g> megapixels</item>
+    </plurals>
+    <plurals name="settings_received_name_taken_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> with a name already used in Luncher\'s pictures</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> with a name already used in Luncher\'s pictures</item>
+    </plurals>
+    <plurals name="settings_received_unreadable_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> couldn\'t be read</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> couldn\'t be read</item>
+    </plurals>
+    <plurals name="settings_received_no_space_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> not added: not enough free storage</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> not added: not enough free storage</item>
+    </plurals>
+    <!-- Those still to add when Cancel stopped the adding. -->
+    <plurals name="settings_received_cancelled_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> not added: cancelled</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> not added: cancelled</item>
+    </plurals>
+    <!-- The last line, when a share had more pictures than Luncher adds at a time: none of them
+         was added; %d is that most, 100. -->
+    <plurals name="settings_received_too_many">
+        <item quantity="one">Too many pictures: up to <xliff:g id="most" example="1">%d</xliff:g> can be added at a time. Share fewer, then try again.</item>
+        <item quantity="other">Too many pictures: up to <xliff:g id="most" example="100">%d</xliff:g> can be added at a time. Share fewer, then try again.</item>
+    </plurals>
+
+    <!-- The picture screens: the background editor's pictures, Add from folder, and why a picture
+         wasn't added. -->
+    <!-- In a window over Add from folder, with a spinning wheel, while the picture chosen is copied
+         into the library. -->
+    <string name="settings_pictures_adding">Adding the picture…</string>
+    <!-- While the library is empty, the steps to add a picture: the heading. -->
+    <string name="settings_pictures_how">To add a picture:</string>
+    <!-- The first way: sharing from another app. "Share" and "Luncher" are what those apps show. -->
+    <string name="settings_pictures_how_share">• In a file manager or gallery, choose Share on a picture, then Luncher.</string>
+    <!-- The second way: a folder on the TV or on a USB drive, whose path is shown below this. -->
+    <string name="settings_pictures_how_folder">• Or copy pictures into this folder, on the TV or a USB drive, then choose Add from folder:</string>
+    <!-- The folder Luncher reads pictures from, the same in every language; %1$s is Luncher's
+         package name, e.g. com.luncher.launcher. -->
+    <string name="settings_pictures_folder_path" translatable="false">Android/media/%1$s</string>
+    <!-- The tile at the end of the pictures, and an entry, that open the list of pictures in that
+         folder; and that list's title. -->
+    <string name="settings_pictures_add_from_folder">Add from folder</string>
+    <!-- A picture's width and height in pixels, and its file's size. -->
+    <string name="settings_pictures_details"><xliff:g id="width" example="1920">%1$d</xliff:g> × <xliff:g id="height" example="1080">%2$d</xliff:g> · <xliff:g id="size" example="3.1 MB">%3$s</xliff:g></string>
+    <!-- Choosing the wallpaper, the first tile: no picture, the plain background. -->
+    <string name="settings_pictures_no_picture">No picture</string>
+    <!-- The name of a picture whose app gave it none. -->
+    <string name="settings_pictures_unnamed">Picture</string>
+    <!-- An action on a picture, and the answer that confirms it. -->
+    <string name="settings_pictures_delete">Delete</string>
+    <!-- The question before deleting one picture, named. -->
+    <string name="settings_pictures_delete_question">Delete <xliff:g id="name" example="beach.png">%1$s</xliff:g>?</string>
+    <!-- Below that question: what deleting it does and doesn't do; then the same for the
+         background's picture, which the home screen loses. -->
+    <string name="settings_pictures_delete_text">The picture is deleted from Luncher\'s pictures only.</string>
+    <string name="settings_pictures_delete_text_background">Used as the background: the home screen will have no picture. The picture is deleted from Luncher\'s pictures only.</string>
+    <!-- An action on a picture, beside Delete, and the answer that confirms the new name. -->
+    <string name="settings_pictures_rename">Rename</string>
+    <!-- The title above the field where the user types a picture's new name. -->
+    <string name="settings_pictures_rename_title">Rename picture</string>
+    <!-- Below that field, in the accent color, when Rename is chosen with nothing typed. -->
+    <string name="settings_pictures_rename_no_name">Type a name</string>
+    <!-- The answer that changes nothing; also, in the window after another app shared
+         pictures, the entry that stops adding them. -->
+    <string name="settings_pictures_cancel">Cancel</string>
+    <!-- The answer to a message. -->
+    <string name="settings_pictures_ok">OK</string>
+    <!-- The title of a message when a picture couldn't be added; a text below says why. -->
+    <string name="settings_pictures_not_added">Picture not added</string>
+    <!-- The title instead when Luncher's pictures had it already (the same picture, or a file of
+         the same name and size); its name below. -->
+    <string name="settings_pictures_already">Already in Luncher\'s pictures</string>
+    <string name="settings_pictures_not_a_picture">The file isn\'t a picture, or it\'s damaged.</string>
+    <!-- %1$s is a picture format's name, e.g. HEIF (HEIC), the iPhone's. -->
+    <string name="settings_pictures_unsupported">This TV can\'t show this <xliff:g id="format" example="HEIF (HEIC)">%1$s</xliff:g> picture. Save it as JPEG or PNG, then add it again.</string>
+    <!-- A picture larger than Luncher takes: its file over the most a picture can be (%1$s, e.g.
+         50 MB), or more pixels than it can have (%d, in millions, 64; the form follows it). -->
+    <string name="settings_pictures_too_large_bytes">Too large: over <xliff:g id="size" example="50 MB">%1$s</xliff:g>.</string>
+    <plurals name="settings_pictures_too_large_pixels">
+        <item quantity="one">Too large: over <xliff:g id="megapixels" example="1">%d</xliff:g> megapixel.</item>
+        <item quantity="other">Too large: over <xliff:g id="megapixels" example="64">%d</xliff:g> megapixels.</item>
+    </plurals>
+    <!-- When Luncher can't read the picture, e.g. an older Android's way of sharing a file, which
+         only apps with storage permission can read; %1$s is the folder's path. -->
+    <string name="settings_pictures_unreadable">The file can\'t be read. Copy it into the folder <xliff:g id="folder" example="Android/media/com.luncher.launcher">%1$s</xliff:g> on this TV or a USB drive, then choose Add from folder.</string>
+    <string name="settings_pictures_no_space">Not enough free storage on this TV. Free up space, then try again.</string>
+    <!-- The library has another picture of this name (another size): the user renames or
+         deletes that one in Luncher, or renames the file elsewhere. -->
+    <string name="settings_pictures_name_taken">Another picture named <xliff:g id="name" example="holiday.jpg">%1$s</xliff:g> is already in Luncher\'s pictures. Rename or delete it in Luncher, or rename this file, then add it again.</string>
+    <!-- Below the title of Add from folder: where its pictures are; %1$s is the folder's path. -->
+    <string name="settings_pictures_folder_where">Pictures in the folder <xliff:g id="folder" example="Android/media/com.luncher.launcher">%1$s</xliff:g>, on this TV or a USB drive</string>
+    <!-- Where a picture of that list is: the TV's own storage, or a USB drive (or a memory card). -->
+    <string name="settings_pictures_folder_this_tv">This TV</string>
+    <string name="settings_pictures_folder_usb">USB drive</string>
+    <!-- A picture of that list: where it is, then its file's name. -->
+    <string name="settings_pictures_folder_row"><xliff:g id="where" example="USB drive">%1$s</xliff:g> · <xliff:g id="name" example="holiday.jpg">%2$s</xliff:g></string>
+    <!-- Below a picture of that list in a format this TV can't show, in the accent color; %1$s is
+         the format's name. -->
+    <string name="settings_pictures_folder_unsupported"><xliff:g id="format" example="HEIF (HEIC)">%1$s</xliff:g> not supported on this TV</string>
+    <!-- Below a picture of that list that can't be added, as the list already tells: its size and
+         file size (%1$s, as settings_pictures_details writes them), then why (%2$s, in the accent
+         color: one of the three below, or settings_pictures_already). -->
+    <string name="settings_pictures_folder_refused"><xliff:g id="details" example="4000 × 3000 · 3.1 MB">%1$s</xliff:g> · <xliff:g id="why" example="Too large (over 50 MB)">%2$s</xliff:g></string>
+    <!-- Its file is larger than the most a picture can be: %1$s, e.g. 50 MB. -->
+    <string name="settings_pictures_folder_too_large_bytes">Too large (over <xliff:g id="size" example="50 MB">%1$s</xliff:g>)</string>
+    <!-- It has more pixels than a picture can have: %d, in millions, 64. -->
+    <plurals name="settings_pictures_folder_too_large_pixels">
+        <item quantity="one">Too large (over <xliff:g id="megapixels" example="1">%d</xliff:g> megapixel)</item>
+        <item quantity="other">Too large (over <xliff:g id="megapixels" example="64">%d</xliff:g> megapixels)</item>
+    </plurals>
+    <!-- A name another picture of the library has: in that list, a picture's file of that name;
+         also below the field of settings_pictures_rename_title, the name typed. -->
+    <string name="settings_pictures_folder_name_taken">Name already used in Luncher\'s pictures</string>
+    <!-- Beside that list, below the preview of the selected picture: adds every picture of the
+         list that can be added. -->
+    <string name="settings_pictures_folder_add_all">Add all</string>
+    <!-- Below that. -->
+    <string name="settings_pictures_folder_note">OK adds a copy to Luncher\'s pictures. After that, the file and the USB drive are no longer needed.</string>
+    <!-- In place of that list, while Luncher looks for pictures, or when there are none. -->
+    <string name="settings_pictures_folder_looking">Looking for pictures…</string>
+    <string name="settings_pictures_folder_empty">No pictures in the folder yet</string>
+    <!-- The names of picture formats some TVs can't show, the same in every language. -->
+    <string name="settings_pictures_format_heif" translatable="false">HEIF (HEIC)</string>
+    <string name="settings_pictures_format_avif" translatable="false">AVIF</string>
+</resources>

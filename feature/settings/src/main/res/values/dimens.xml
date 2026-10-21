@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="settings_panel_width">420dp</dimen>
+    <dimen name="settings_panel_padding">24dp</dimen>
+    <dimen name="settings_title_text">24sp</dimen>
+    <!-- Between the title and the first entry. -->
+    <dimen name="settings_title_gap">16dp</dimen>
+    <dimen name="settings_entry_height">56dp</dimen>
+    <dimen name="settings_entry_padding">16dp</dimen>
+    <dimen name="settings_entry_text">20sp</dimen>
+    <!-- The Hide apps list: at most six and a half rows tall, then it scrolls; the half row shows
+         there's more. On a small screen fewer, so the panel keeps the margin from the screen's
+         top and bottom edges. Between an app's name and its state. -->
+    <dimen name="settings_list_max_height">364dp</dimen>
+    <dimen name="settings_panel_margin">32dp</dimen>
+    <dimen name="settings_app_state_gap">16dp</dimen>
+    <!-- The strip at the list's end, in the panel's padding, where its scrollbar goes. -->
+    <dimen name="settings_list_scrollbar">12dp</dimen>
+    <dimen name="settings_list_scrollbar_negative">-12dp</dimen>
+    <!-- The appearance editor, full-screen: its content inside the TV's overscan margin, as the
+         home screen's; the options at most this wide, and half the screen on a narrow one; an
+         option set in from its group; the gap around a value between its arrows; the title,
+         large in the room beside the options. -->
+    <dimen name="settings_appearance_margin_horizontal">48dp</dimen>
+    <dimen name="settings_appearance_margin_vertical">32dp</dimen>
+    <dimen name="settings_appearance_options_width">440dp</dimen>
+    <dimen name="settings_appearance_option_indent">32dp</dimen>
+    <dimen name="settings_appearance_value_gap">8dp</dimen>
+    <dimen name="settings_appearance_title_text">40sp</dimen>
+    <!-- The background editor's pictures: a row's padding above and below; its thumbnail, 16:9,
+         the size the thumbnails are drawn at. -->
+    <dimen name="settings_background_row_padding">8dp</dimen>
+    <dimen name="settings_background_thumbnail_width">96dp</dimen>
+    <dimen name="settings_background_thumbnail_height">54dp</dimen>
+    <!-- An option's values in a list over its row (OptionList): its padding above and below the
+         entries, its least width, its shadow; the mark beside the row's value that OK opens it,
+         and its gap to the value. -->
+    <dimen name="settings_option_list_padding">8dp</dimen>
+    <dimen name="settings_option_list_min_width">160dp</dimen>
+    <dimen name="settings_option_list_elevation">8dp</dimen>
+    <dimen name="settings_option_list_mark">24dp</dimen>
+    <dimen name="settings_option_list_mark_gap">4dp</dimen>
+    <!-- The window after a share: its spinning wheel while the picture is added. -->
+    <dimen name="settings_received_spinner">32dp</dimen>
+
+    <!-- Add from folder, full-screen as the appearance editor: the content inside the TV's overscan
+         margin. -->
+    <dimen name="settings_pictures_margin_horizontal">48dp</dimen>
+    <dimen name="settings_pictures_margin_vertical">32dp</dimen>
+    <dimen name="settings_pictures_title_text">40sp</dimen>
+    <dimen name="settings_pictures_status_text">20sp</dimen>
+    <dimen name="settings_pictures_text">20sp</dimen>
+    <dimen name="settings_pictures_small_text">16sp</dimen>
+    <!-- Below the title and its status line. -->
+    <dimen name="settings_pictures_title_gap">24dp</dimen>
+    <!-- Between a picture and its text; a thumbnail's corners. -->
+    <dimen name="settings_pictures_tile_text_gap">8dp</dimen>
+    <dimen name="settings_pictures_tile_corner">8dp</dimen>
+    <!-- The focus frame and the dashes of Add from folder's empty thumbnail. -->
+    <dimen name="settings_pictures_frame">3dp</dimen>
+    <dimen name="settings_pictures_dash">8dp</dimen>
+    <dimen name="settings_pictures_dash_line">2dp</dimen>
+    <!-- An entry (a dialog's, Add from folder's), as the settings panel's. -->
+    <dimen name="settings_pictures_entry_height">56dp</dimen>
+    <dimen name="settings_pictures_entry_padding">16dp</dimen>
+    <!-- Add from folder: a row of the list at least, and the preview of the selected one beside
+         it at most, of the TV's shape. -->
+    <dimen name="settings_pictures_row_height">72dp</dimen>
+    <dimen name="settings_pictures_preview_width">288dp</dimen>
+    <!-- The preview's column and the gap before it: the list's margin at its end. -->
+    <dimen name="settings_pictures_side_width">320dp</dimen>
+    <!-- The warning mark in place of a preview that can't be drawn. -->
+    <dimen name="settings_pictures_warning">48dp</dimen>
+    <!-- A dialog: its width at most, its padding. -->
+    <dimen name="settings_pictures_dialog_width">480dp</dimen>
+    <dimen name="settings_pictures_dialog_padding">24dp</dimen>
+    <dimen name="settings_pictures_dialog_margin">32dp</dimen>
+</resources>

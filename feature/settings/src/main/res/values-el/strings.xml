@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Greek. What each string is for: values/strings.xml. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="settings_title">Ρυθμίσεις</string>
+    <string name="settings_hide_apps">Απόκρυψη εφαρμογών</string>
+    <string name="settings_hidden">Κρυφή</string>
+    <string name="settings_no_apps">Δεν υπάρχουν εγκατεστημένες εφαρμογές TV</string>
+    <string name="settings_appearance">Εμφάνιση</string>
+    <string name="settings_appearance_tiles">Πλακίδια</string>
+    <string name="settings_appearance_top_bar">Ώρα και ημερομηνία</string>
+    <string name="settings_appearance_vertical_alignment">Κατακόρυφη στοίχιση</string>
+    <string name="settings_appearance_top">Πάνω</string>
+    <string name="settings_appearance_bottom">Κάτω</string>
+    <string name="settings_appearance_center">Στο κέντρο</string>
+    <string name="settings_appearance_horizontal_alignment">Οριζόντια στοίχιση</string>
+    <string name="settings_appearance_full_bottom_row">Γεμάτη κάτω σειρά</string>
+    <string name="settings_appearance_corner_radius">Στρογγύλεμα γωνιών</string>
+    <string name="settings_appearance_radius_dp"><xliff:g id="radius" example="8">%1$d</xliff:g> dp</string>
+    <string name="settings_appearance_pill">Κάψουλα</string>
+    <string name="settings_appearance_time">Ώρα</string>
+    <string name="settings_appearance_date">Ημερομηνία</string>
+    <string name="settings_appearance_shown">Εμφανής</string>
+    <string name="settings_appearance_hidden">Κρυφή</string>
+    <string name="settings_appearance_clock_side">Πλευρά</string>
+    <string name="settings_appearance_left">Αριστερά</string>
+    <string name="settings_appearance_right">Δεξιά</string>
+    <string name="settings_appearance_time_side">Σειρά</string>
+    <string name="settings_appearance_time_first">Ώρα αριστερά</string>
+    <string name="settings_appearance_date_first">Ώρα δεξιά</string>
+    <string name="settings_appearance_background">Φόντο</string>
+    <string name="settings_appearance_picture">Εικόνα</string>
+    <string name="settings_appearance_no_picture">Καμία</string>
+    <string name="settings_appearance_fit">Προσαρμογή</string>
+    <string name="settings_appearance_fill">Γέμισμα</string>
+    <string name="settings_appearance_stretch">Τέντωμα</string>
+    <string name="settings_appearance_position">Θέση</string>
+    <string name="settings_appearance_dim">Σκίαση</string>
+    <string name="settings_appearance_dim_light">Ελαφριά</string>
+    <string name="settings_appearance_dim_medium">Μέτρια</string>
+    <string name="settings_appearance_dim_strong">Έντονη</string>
+    <string name="settings_appearance_blur">Θόλωμα</string>
+    <string name="settings_appearance_light">Ελαφρύ</string>
+    <string name="settings_appearance_medium">Μέτριο</string>
+    <string name="settings_appearance_strong">Έντονο</string>
+    <string name="settings_appearance_on">Ναι</string>
+    <string name="settings_appearance_off">Όχι</string>
+    <string name="settings_appearance_reset">Επαναφορά προεπιλογών</string>
+    <string name="settings_system">Ρυθμίσεις συστήματος</string>
+    <string name="settings_system_unavailable">Καμία εφαρμογή ρυθμίσεων σε αυτή τη συσκευή</string>
+
+    <string name="settings_background_hint">Κρατήστε πατημένο το OK σε μια εικόνα για να τη μετονομάσετε ή να τη διαγράψετε</string>
+    <string name="settings_background_save">Αποθήκευση</string>
+    <string name="settings_background_delete_all">Διαγραφή όλων</string>
+    <string name="settings_background_delete_all_question">Διαγραφή όλων των εικόνων;</string>
+    <plurals name="settings_background_delete_all_text">
+        <item quantity="one">Η εικόνα διαγράφεται μόνο από τις εικόνες του Luncher.</item>
+        <item quantity="other">Οι <xliff:g id="count" example="9">%d</xliff:g> εικόνες διαγράφονται μόνο από τις εικόνες του Luncher.</item>
+    </plurals>
+    <plurals name="settings_background_delete_all_text_background">
+        <item quantity="one">Χρησιμοποιείται ως φόντο: η αρχική οθόνη θα μείνει χωρίς εικόνα. Η εικόνα διαγράφεται μόνο από τις εικόνες του Luncher.</item>
+        <item quantity="other">Μία χρησιμοποιείται ως φόντο: η αρχική οθόνη θα μείνει χωρίς εικόνα. Οι <xliff:g id="count" example="9">%d</xliff:g> εικόνες διαγράφονται μόνο από τις εικόνες του Luncher.</item>
+    </plurals>
+    <string name="settings_background_applying">Επεξεργασία φόντου…</string>
+    <string name="settings_background_preparing">Προετοιμασία της εικόνας…</string>
+    <string name="settings_background_preparing_count">Προετοιμασία εικόνας <xliff:g id="number" example="3">%1$d</xliff:g> από <xliff:g id="total" example="10">%2$d</xliff:g>…</string>
+
+    <string name="settings_pictures_adding">Προσθήκη της εικόνας…</string>
+    <string name="settings_pictures_how">Για να προσθέσετε μια εικόνα:</string>
+    <string name="settings_pictures_how_share">• Σε μια διαχείριση αρχείων ή συλλογή, επιλέξτε Κοινοποίηση σε μια εικόνα και μετά Luncher.</string>
+    <string name="settings_pictures_how_folder">• Ή αντιγράψτε εικόνες σε αυτόν τον φάκελο, στην τηλεόραση ή σε ένα USB, και μετά επιλέξτε Προσθήκη από φάκελο:</string>
+    <string name="settings_pictures_add_from_folder">Προσθήκη από φάκελο</string>
+    <string name="settings_pictures_details"><xliff:g id="width" example="1920">%1$d</xliff:g> × <xliff:g id="height" example="1080">%2$d</xliff:g> · <xliff:g id="size" example="3,1 MB">%3$s</xliff:g></string>
+    <string name="settings_pictures_no_picture">Χωρίς εικόνα</string>
+    <string name="settings_pictures_unnamed">Εικόνα</string>
+    <string name="settings_pictures_delete">Διαγραφή</string>
+    <string name="settings_pictures_delete_question">Διαγραφή του <xliff:g id="name" example="beach.png">%1$s</xliff:g>;</string>
+    <string name="settings_pictures_delete_text">Η εικόνα διαγράφεται μόνο από τις εικόνες του Luncher.</string>
+    <string name="settings_pictures_delete_text_background">Χρησιμοποιείται ως φόντο: η αρχική οθόνη θα μείνει χωρίς εικόνα. Η εικόνα διαγράφεται μόνο από τις εικόνες του Luncher.</string>
+    <string name="settings_pictures_rename">Μετονομασία</string>
+    <string name="settings_pictures_rename_title">Μετονομασία εικόνας</string>
+    <string name="settings_pictures_rename_no_name">Πληκτρολογήστε ένα όνομα</string>
+    <string name="settings_pictures_cancel">Ακύρωση</string>
+    <string name="settings_pictures_ok">OK</string>
+    <string name="settings_pictures_not_added">Η εικόνα δεν προστέθηκε</string>
+    <string name="settings_pictures_already">Υπάρχει ήδη στις εικόνες του Luncher</string>
+    <string name="settings_pictures_not_a_picture">Το αρχείο δεν είναι εικόνα ή είναι κατεστραμμένο.</string>
+    <string name="settings_pictures_unsupported">Αυτή η τηλεόραση δεν μπορεί να δείξει αυτή την εικόνα <xliff:g id="format" example="HEIF (HEIC)">%1$s</xliff:g>. Αποθηκεύστε την ως JPEG ή PNG και μετά προσθέστε την ξανά.</string>
+    <string name="settings_pictures_too_large_bytes">Πολύ μεγάλη: πάνω από <xliff:g id="size" example="50 MB">%1$s</xliff:g>.</string>
+    <plurals name="settings_pictures_too_large_pixels">
+        <item quantity="one">Πολύ μεγάλη: πάνω από <xliff:g id="megapixels" example="1">%d</xliff:g> megapixel.</item>
+        <item quantity="other">Πολύ μεγάλη: πάνω από <xliff:g id="megapixels" example="64">%d</xliff:g> megapixel.</item>
+    </plurals>
+    <string name="settings_pictures_unreadable">Το αρχείο δεν μπορεί να διαβαστεί. Αντιγράψτε το στον φάκελο <xliff:g id="folder" example="Android/media/com.luncher.launcher">%1$s</xliff:g> στην τηλεόραση ή σε ένα USB και μετά επιλέξτε Προσθήκη από φάκελο.</string>
+    <string name="settings_pictures_no_space">Δεν υπάρχει αρκετός ελεύθερος χώρος στην τηλεόραση. Ελευθερώστε χώρο και μετά δοκιμάστε ξανά.</string>
+    <string name="settings_pictures_name_taken">Υπάρχει ήδη άλλη εικόνα με όνομα <xliff:g id="name" example="holiday.jpg">%1$s</xliff:g> στις εικόνες του Luncher. Μετονομάστε ή διαγράψτε την στο Luncher, ή μετονομάστε αυτό το αρχείο, και μετά προσθέστε το ξανά.</string>
+    <string name="settings_pictures_folder_where">Εικόνες στον φάκελο <xliff:g id="folder" example="Android/media/com.luncher.launcher">%1$s</xliff:g>, στην τηλεόραση ή σε ένα USB</string>
+    <string name="settings_pictures_folder_this_tv">Τηλεόραση</string>
+    <string name="settings_pictures_folder_usb">USB</string>
+    <string name="settings_pictures_folder_row"><xliff:g id="where" example="USB">%1$s</xliff:g> · <xliff:g id="name" example="holiday.jpg">%2$s</xliff:g></string>
+    <string name="settings_pictures_folder_unsupported">Το <xliff:g id="format" example="HEIF (HEIC)">%1$s</xliff:g> δεν υποστηρίζεται σε αυτή την τηλεόραση</string>
+    <string name="settings_pictures_folder_refused"><xliff:g id="details" example="4000 × 3000 · 3,1 MB">%1$s</xliff:g> · <xliff:g id="why" example="Πολύ μεγάλη (πάνω από 50 MB)">%2$s</xliff:g></string>
+    <string name="settings_pictures_folder_too_large_bytes">Πολύ μεγάλη (πάνω από <xliff:g id="size" example="50 MB">%1$s</xliff:g>)</string>
+    <plurals name="settings_pictures_folder_too_large_pixels">
+        <item quantity="one">Πολύ μεγάλη (πάνω από <xliff:g id="megapixels" example="1">%d</xliff:g> megapixel)</item>
+        <item quantity="other">Πολύ μεγάλη (πάνω από <xliff:g id="megapixels" example="64">%d</xliff:g> megapixel)</item>
+    </plurals>
+    <string name="settings_pictures_folder_name_taken">Το όνομα υπάρχει ήδη στις εικόνες του Luncher</string>
+    <string name="settings_pictures_folder_add_all">Προσθήκη όλων</string>
+    <string name="settings_pictures_folder_note">Το OK προσθέτει ένα αντίγραφο στις εικόνες του Luncher. Μετά από αυτό, το αρχείο και το USB δεν χρειάζονται πια.</string>
+    <string name="settings_pictures_folder_looking">Αναζήτηση εικόνων…</string>
+    <string name="settings_pictures_folder_empty">Δεν υπάρχουν ακόμη εικόνες στον φάκελο</string>
+    <string name="settings_received_adding">Προσθήκη της εικόνας…</string>
+    <string name="settings_received_saved">Η εικόνα προστέθηκε</string>
+    <string name="settings_received_adding_count">Προσθήκη εικόνας <xliff:g id="number" example="3">%1$d</xliff:g> από <xliff:g id="total" example="10">%2$d</xliff:g>…</string>
+    <plurals name="settings_received_saved_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> εικόνα προστέθηκε</item>
+        <item quantity="other"><xliff:g id="count" example="9">%d</xliff:g> εικόνες προστέθηκαν</item>
+    </plurals>
+    <string name="settings_received_none_added">Οι εικόνες δεν προστέθηκαν</string>
+    <plurals name="settings_received_already_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> υπάρχει ήδη στις εικόνες του Luncher</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> υπάρχουν ήδη στις εικόνες του Luncher</item>
+    </plurals>
+    <plurals name="settings_received_not_a_picture_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> δεν είναι εικόνα ή είναι κατεστραμμένη</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> δεν είναι εικόνες ή είναι κατεστραμμένες</item>
+    </plurals>
+    <plurals name="settings_received_unsupported_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> σε μορφή που η τηλεόραση δεν μπορεί να δείξει</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> σε μορφή που η τηλεόραση δεν μπορεί να δείξει</item>
+    </plurals>
+    <plurals name="settings_received_too_large_bytes_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> μεγαλύτερη από <xliff:g id="size" example="50 MB">%2$s</xliff:g></item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> μεγαλύτερες από <xliff:g id="size" example="50 MB">%2$s</xliff:g></item>
+    </plurals>
+    <plurals name="settings_received_too_large_pixels_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> μεγαλύτερη από <xliff:g id="megapixels" example="64">%2$d</xliff:g> megapixel</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> μεγαλύτερες από <xliff:g id="megapixels" example="64">%2$d</xliff:g> megapixel</item>
+    </plurals>
+    <plurals name="settings_received_name_taken_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> με όνομα που υπάρχει ήδη στις εικόνες του Luncher</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> με όνομα που υπάρχει ήδη στις εικόνες του Luncher</item>
+    </plurals>
+    <plurals name="settings_received_unreadable_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> δεν μπόρεσε να διαβαστεί</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> δεν μπόρεσαν να διαβαστούν</item>
+    </plurals>
+    <plurals name="settings_received_no_space_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> δεν προστέθηκε: δεν υπάρχει αρκετός ελεύθερος χώρος</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> δεν προστέθηκαν: δεν υπάρχει αρκετός ελεύθερος χώρος</item>
+    </plurals>
+    <plurals name="settings_received_cancelled_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> δεν προστέθηκε: ακυρώθηκε</item>
+        <item quantity="other"><xliff:g id="count" example="2">%d</xliff:g> δεν προστέθηκαν: ακυρώθηκαν</item>
+    </plurals>
+    <plurals name="settings_received_too_many">
+        <item quantity="one">Πάρα πολλές εικόνες: έως <xliff:g id="most" example="1">%d</xliff:g> εικόνα μπορεί να προστεθεί τη φορά. Μοιραστείτε λιγότερες και μετά δοκιμάστε ξανά.</item>
+        <item quantity="other">Πάρα πολλές εικόνες: έως <xliff:g id="most" example="100">%d</xliff:g> εικόνες μπορούν να προστεθούν τη φορά. Μοιραστείτε λιγότερες και μετά δοκιμάστε ξανά.</item>
+    </plurals>
+</resources>
