@@ -12,7 +12,7 @@
     <!-- The activities are declared in the feature modules' manifests, which the build merges
          into this one; here, what makes the home screen's activity Luncher's entry point. -->
     <application
-        android:name=".LuncherApplication"
+        android:name="com.luncher.launcher.LuncherApplication"
         android:allowBackup="true"
         android:banner="@drawable/banner"
         android:icon="@drawable/ic_launcher"
