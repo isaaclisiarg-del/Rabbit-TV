@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="rs2_icon_primary">#77216F</color>
+  <color name="rs2_icon_accent">#E95420</color>
+  <color name="rs2_icon_face">#FFFFFF</color>
+  <color name="rs2_icon_negative">#F5EFF5</color>
+  <color name="rs2_launcher_background">#F5EFF5</color>
+  <color name="rs2_module_tile">#F5EFF5</color>
+</resources>
