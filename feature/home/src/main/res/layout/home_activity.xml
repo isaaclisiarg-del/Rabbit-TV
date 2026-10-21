@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merged into the window's content FrameLayout: one view level less to lay out and draw. -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- The top bar stays in place; the tiles scroll in the space below it. Left to right in every
+         language: where the clock, the settings entry and the tiles go is for settings to decide,
+         not the language. So a right-to-left language mirrors only the settings panels, and a
+         future carousel (a RecyclerView, say) doesn't mirror either. Texts still read in their
+         own direction, lined up at the left (Theme.Luncher). -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:orientation="vertical">
+
+        <!-- The clock at one edge, the settings entry (later e.g. status indicators too) at the
+             other: which is where, TopBarView decides from the appearance, and moves them. Not
+             focusable itself: D-pad Up from the tiles reaches only what's focusable in it. While
+             the user arranges apps, the mode's title and key hint take the place of the clock
+             and the settings entry. -->
+        <com.luncher.launcher.home.TopBarView
+            android:id="@+id/home_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/home_padding_horizontal"
+            android:paddingTop="@dimen/home_padding_vertical"
+            android:paddingRight="@dimen/home_padding_horizontal">
+
+            <!-- Time and date share a baseline, side by side in the order the appearance gives. -->
+            <com.luncher.launcher.home.ClockView
+                android:id="@+id/home_clock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.luncher.launcher.home.OutlinedTextView
+                    android:id="@+id/home_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/home_time_text" />
+
+                <com.luncher.launcher.home.OutlinedTextView
+                    android:id="@+id/home_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/home_date_text" />
+            </com.luncher.launcher.home.ClockView>
+
+            <!-- As tall as the settings entry it replaces, so the tiles below stay where they are.
+                 What the hint leaves of the bar: where a language's title and hint don't both
+                 fit (a narrow screen, large text), the title ends in "…", never the hint. -->
+            <com.luncher.launcher.home.OutlinedTextView
+                android:id="@+id/home_arrange_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/home_settings_size"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:text="@string/home_arrange_title"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/home_time_text"
+                android:visibility="gone" />
+
+            <com.luncher.launcher.home.OutlinedTextView
+                android:id="@+id/home_arrange_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/home_arrange_hint_text"
+                android:visibility="gone" />
+
+            <!-- Opens the settings panel. Focusable, so Up from the first row of tiles reaches it. -->
+            <ImageView
+                android:id="@+id/home_settings"
+                android:layout_width="@dimen/home_settings_size"
+                android:layout_height="@dimen/home_settings_size"
+                android:background="@drawable/home_settings_background"
+                android:contentDescription="@string/home_settings"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:padding="@dimen/home_settings_padding"
+                android:src="@drawable/home_settings" />
+        </com.luncher.launcher.home.TopBarView>
+
+        <!-- Tiles may zoom past the padding, and scroll through it up to the top bar. -->
+        <com.luncher.launcher.home.AppTilesView
+            android:id="@+id/home_apps"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingLeft="@dimen/home_padding_horizontal"
+            android:paddingTop="@dimen/home_tiles_padding_top"
+            android:paddingRight="@dimen/home_padding_horizontal"
+            android:paddingBottom="@dimen/home_padding_vertical" />
+    </LinearLayout>
+
+    <com.luncher.launcher.home.OutlinedTextView
+        android:id="@+id/home_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/home_no_apps"
+        android:textColor="@color/text_secondary"
+        android:textSize="@dimen/home_empty_text"
+        android:visibility="gone" />
+
+</merge>
