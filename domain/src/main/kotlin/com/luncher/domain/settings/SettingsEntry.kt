@@ -1,0 +1,18 @@
+package com.luncher.domain.settings
+
+/**
+ * One entry of the settings panel. Each kind of entry is a type of its own, so :feature:settings
+ * handles every one of them (its label, what OK on it does) in an exhaustive `when`: a new entry
+ * that it doesn't handle yet doesn't compile.
+ */
+sealed interface SettingsEntry {
+
+    /** Lists every app, to hide it from the home screen or show it again. */
+    data object HideApps : SettingsEntry
+
+    /** Opens the editor of the home screen's appearance. */
+    data object Appearance : SettingsEntry
+
+    /** Opens the device's own settings app. */
+    data object SystemSettings : SettingsEntry
+}
