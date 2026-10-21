@@ -146,10 +146,11 @@ class HomeActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
-        HomeOverrideRuntime.lastHomeResumedAt = SystemClock.elapsedRealtime()
         // Paused and resumed while arranging (a system dialog came and went): the tiles are the
         // user's work in progress, so the apps are read again only when the mode ends.
         if (!arrange.active) refresh()
+        // Acknowledge only after the home view has resumed and refreshed successfully.
+        HomeOverrideRuntime.lastHomeResumedAt = SystemClock.elapsedRealtime()
     }
 
     // Home while the home screen is in front.

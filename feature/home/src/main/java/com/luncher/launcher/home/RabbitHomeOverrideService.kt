@@ -59,7 +59,7 @@ class RabbitHomeOverrideService : AccessibilityService() {
         if (pendingRequestAt != 0L || now - lastRequestAt < REQUEST_COOLDOWN_MS) return
         lastRequestAt = now
 
-        while (!recentRequests.isEmpty() && now - recentRequests.first > REQUEST_WINDOW_MS) {
+        while (!recentRequests.isEmpty() && now - recentRequests.peekFirst() > REQUEST_WINDOW_MS) {
             recentRequests.removeFirst()
         }
         if (recentRequests.size >= MAX_REQUESTS_IN_WINDOW) {
