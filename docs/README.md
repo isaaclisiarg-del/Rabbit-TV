@@ -1,8 +1,7 @@
 # docs/
 
 The documentation for developers: guides that cover the whole project rather than one folder, and
-where to start. The root [`README.md`](../README.md) shows Luncher to its users: what it is, what
-it does, and how to install it.
+where to start. The root [`README.md`](../README.md) summarizes Rabbit TV, its current state and how to prepare the project.
 
 ## Reading order
 
