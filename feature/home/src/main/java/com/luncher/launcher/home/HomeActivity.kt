@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -12,23 +14,25 @@ import android.widget.TextView
 import android.window.OnBackInvokedDispatcher
 import com.luncher.domain.appearance.Appearance
 import com.luncher.domain.apps.ArrangedApps
+import com.luncher.domain.apps.AppArrangement
 import com.luncher.domain.apps.InstalledApp
+import com.luncher.domain.apps.LaunchableApp
 import com.luncher.domain.apps.homeApps
-import com.luncher.launcher.settings.R as SettingsR
 import com.luncher.launcher.settings.SettingsActivity
 import java.util.Locale
 
 /**
- * The home screen: the time, the date and a settings entry above the TV apps the user didn't hide,
- * as tiles; OK on a tile opens its app, OK on the settings entry (or the Menu key) opens the
- * settings panel. A long press of OK on a tile starts [ArrangeMode], where the user moves and
- * hides apps; it gets every key first while it's on.
+ * The Rabbit TV home surface: a three-entry dock, favorite app tiles and a second view for all TV
+ * apps. OK opens favorites on Home and toggles favorite state on Apps; a long press of OK on Home
+ * starts [ArrangeMode], where the user moves and removes favorites.
  *
  * How it looks follows the user's [Appearance] while it's shown: each part goes to the view that
  * draws it (the background to the window, [HomeWallpaper]), which compares it with what it has, so
  * an unchanged part costs nothing.
  */
 class HomeActivity : Activity() {
+
+    private enum class Page { HOME, APPS }
 
     private val installedApps by lazy { graph.installedApps }
     private val arrangements by lazy { graph.appArrangements }
@@ -41,6 +45,11 @@ class HomeActivity : Activity() {
     private lateinit var empty: TextView
     private lateinit var arrange: ArrangeMode
     private lateinit var wallpaper: HomeWallpaper
+    private lateinit var pageHint: TextView
+    private lateinit var homeEntry: TextView
+    private lateinit var appsEntry: TextView
+    private lateinit var settingsEntry: TextView
+    private var page = Page.HOME
 
     /** What the tiles show; null until the first [onResume]. */
     private var shown: List<InstalledApp>? = null
@@ -63,8 +72,6 @@ class HomeActivity : Activity() {
         if (arrange.active) appsChangedWhileArranging = true else refresh()
     }
 
-    private val openApp = View.OnClickListener { open((it as AppTileView).app) }
-
     private val startArranging = View.OnLongClickListener {
         val arranged = arranged ?: return@OnLongClickListener false
         arrange.start(arranged, it as AppTileView)
@@ -76,14 +83,25 @@ class HomeActivity : Activity() {
         setContentView(R.layout.home_activity)
         topBar = findViewById(R.id.home_top_bar)
         tiles = findViewById(R.id.home_apps)
+        tiles.navigateLeft = { if (page == Page.HOME) homeEntry else appsEntry }
         empty = findViewById(R.id.home_empty)
         clockView = findViewById(R.id.home_clock)
-        val settingsEntry = findViewById<View>(R.id.home_settings)
+        pageHint = findViewById(R.id.home_page_hint)
+        homeEntry = findViewById(R.id.home_dock_home)
+        appsEntry = findViewById(R.id.home_dock_apps)
+        settingsEntry = findViewById(R.id.home_dock_settings)
+        homeEntry.setOnClickListener { selectPage(Page.HOME) }
+        appsEntry.setOnClickListener { selectPage(Page.APPS) }
         settingsEntry.setOnClickListener { openSettings() }
+        setupDockEntry(homeEntry)
+        setupDockEntry(appsEntry)
+        setupDockEntry(settingsEntry)
+        findViewById<View>(R.id.home_settings).visibility = View.GONE
+        updateDockSelection()
         wallpaper = HomeWallpaper(this, graph.wallpaper)
         arrange = ArrangeMode(
             tiles,
-            normalBar = listOf(clockView, settingsEntry),
+            normalBar = listOf(clockView),
             title = findViewById(R.id.home_arrange_title),
             hint = findViewById(R.id.home_arrange_hint),
             images,
@@ -146,11 +164,114 @@ class HomeActivity : Activity() {
      * settings, since the home screen was last shown.
      */
     private fun refresh() {
-        val arranged = homeApps(installedApps.tvApps(), packageName, arrangements.read(), Locale.getDefault())
+        val installed = installedApps.tvApps()
+        var saved = arrangements.read()
+        if (saved.order == null && saved.hidden.isEmpty()) {
+            val candidates = installed.asSequence()
+                .filter { app -> app.launchable.packageName != packageName && isInitialFavorite(app) }
+                .sortedBy(::initialFavoriteOrder)
+                .toList()
+            val selected = candidates.map { it.launchable }.toSet()
+            saved = AppArrangement(
+                order = candidates.map { it.launchable },
+                hidden = installed.asSequence()
+                    .filter { it.launchable.packageName != packageName && it.launchable !in selected }
+                    .map { it.launchable }
+                    .toList(),
+            )
+            arrangements.save(saved)
+        }
+        if (saved.order != null) {
+            val accountedFor = (saved.order + saved.hidden).toHashSet()
+            val newApps = installed.asSequence()
+                .filter { it.launchable.packageName != packageName && it.launchable !in accountedFor }
+                .map { it.launchable }
+                .toList()
+            if (newApps.isNotEmpty()) {
+                saved = saved.copy(hidden = saved.hidden + newApps)
+                arrangements.save(saved)
+            }
+        }
+        val arranged = homeApps(installed, packageName, saved, Locale.getDefault())
         this.arranged = arranged
         // Unchanged, as on most returns to the home screen: keep the tiles, their images and focus.
-        if (arranged.shown != shown) show(arranged.shown)
+        if (arranged.shown != shown) shown = arranged.shown
+        renderCurrentPage(arranged)
         showWhyEmpty(arranged)
+    }
+
+    private fun isInitialFavorite(app: InstalledApp): Boolean {
+        val label = app.label.trim().lowercase(Locale.ROOT)
+        val packageName = app.launchable.packageName.lowercase(Locale.ROOT)
+        return label.contains("youtube") || label.contains("spotify") || label.contains("twitch") ||
+            packageName.startsWith("com.google.android.youtube") ||
+            packageName.startsWith("com.spotify.") ||
+            packageName.startsWith("tv.twitch.")
+    }
+
+    private fun initialFavoriteOrder(app: InstalledApp): Int {
+        val label = app.label.lowercase(Locale.ROOT)
+        return when {
+            label.contains("youtube") -> 0
+            label.contains("spotify") -> 1
+            else -> 2
+        }
+    }
+
+    private fun selectPage(next: Page) {
+        if (arrange.active) arrange.end()
+        val previousFocus = (tiles.focusedChild as? AppTileView)?.app
+        val changed = page != next
+        page = next
+        updateDockSelection()
+        refresh()
+        if (changed) {
+            val index = (0 until tiles.childCount).firstOrNull { (tiles.getChildAt(it) as AppTileView).app == previousFocus }
+                ?: 0
+            tiles.getChildAt(index)?.requestFocus()
+        }
+    }
+
+    private fun renderCurrentPage(arranged: ArrangedApps) {
+        val favorites = arranged.shown.mapTo(HashSet()) { it.launchable }
+        when (page) {
+            Page.HOME -> {
+                findViewById<TextView>(R.id.home_title).text = getString(R.string.rabbit_tv_title)
+                pageHint.visibility = View.GONE
+                findViewById<View>(R.id.home_empty).visibility = View.GONE
+                show(arranged.shown, favorites, showLabels = true)
+            }
+            Page.APPS -> {
+                findViewById<TextView>(R.id.home_title).text = getString(R.string.rabbit_tv_apps_title)
+                pageHint.text = getString(R.string.rabbit_tv_apps_hint)
+                pageHint.visibility = View.VISIBLE
+                val allApps = (arranged.shown + arranged.hidden)
+                    .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.label })
+                findViewById<View>(R.id.home_empty).visibility = if (allApps.isEmpty()) View.VISIBLE else View.GONE
+                show(allApps, favorites, showLabels = true)
+            }
+        }
+    }
+
+    private fun updateDockSelection() {
+        setDockSelected(homeEntry, page == Page.HOME)
+        setDockSelected(appsEntry, page == Page.APPS)
+    }
+
+    private fun setupDockEntry(entry: TextView) {
+        entry.setOnFocusChangeListener { view, _ -> setDockSelected(view as TextView, view.isSelected) }
+    }
+
+    private fun setDockSelected(entry: TextView, selected: Boolean) {
+        entry.isSelected = selected
+        val density = resources.displayMetrics.density
+        entry.background = GradientDrawable().apply {
+            shape = GradientDrawable.RECTANGLE
+            cornerRadius = density * 14f
+            setColor(if (selected || entry.hasFocus()) 0x33FF7449 else Color.TRANSPARENT)
+            if (entry.hasFocus()) setStroke((density * 2).toInt(), 0xFFFF7449.toInt())
+        }
+        entry.setTextColor(if (selected || entry.hasFocus()) 0xFFFF9A77.toInt() else Color.WHITE)
     }
 
     private fun show(appearance: Appearance) {
@@ -171,37 +292,67 @@ class HomeActivity : Activity() {
         }
     }
 
-    private fun show(apps: List<InstalledApp>) {
+    private fun show(apps: List<InstalledApp>, favorites: Set<LaunchableApp>, showLabels: Boolean) {
         val focused = (tiles.focusedChild as? AppTileView)?.app?.launchable
-        // Focus in the top bar (on the settings entry) stays there; the tiles don't take it.
+        // If focus is on a dock or header item, leave it there; otherwise restore the focused tile.
         val topBarFocused = topBar.hasFocus()
+        val dockFocused = homeEntry.hasFocus() || appsEntry.hasFocus() || settingsEntry.hasFocus()
         // Apps still there keep their tile and its image: installing one app draws one banner.
         val kept = (0 until tiles.childCount).map { tiles.getChildAt(it) as AppTileView }.associateBy { it.app }
         tiles.removeAllViews()
         for (app in apps) {
-            tiles.addView(
-                kept[app] ?: AppTileView(this, app, images, tiles.paints).apply {
-                    setOnClickListener(openApp)
-                    setOnLongClickListener(startArranging)
-                },
-            )
+            val tile = kept[app] ?: AppTileView(this, app, images, tiles.paints)
+            tile.setOnClickListener { clicked ->
+                val selected = (clicked as AppTileView).app
+                if (page == Page.HOME) open(selected) else toggleFavorite(selected)
+            }
+            tile.setOnLongClickListener(if (page == Page.HOME) startArranging else null)
+            tile.showLabel = showLabels
+            tile.hidden = app.launchable !in favorites
+            tile.labelText = if (page == Page.APPS) {
+                (if (app.launchable in favorites) "✓ " else "＋ ") + app.label
+            } else app.label
+            tile.contentDescription = when {
+                page == Page.APPS && app.launchable in favorites -> "${app.label}, favorita"
+                page == Page.APPS -> "${app.label}, no favorita. Pulsa OK para añadirla a Inicio"
+                else -> app.label
+            }
+            tile.invalidate()
+            if (tile.id == View.NO_ID) tile.id = View.generateViewId()
+            tiles.addView(tile)
+        }
+        tiles.getChildAt(0)?.id?.let { firstTileId ->
+            homeEntry.nextFocusRightId = firstTileId
+            appsEntry.nextFocusRightId = firstTileId
         }
         shown = apps
         val index = apps.indexOfFirst { it.launchable == focused }.coerceAtLeast(0)
-        if (!topBarFocused) tiles.getChildAt(index)?.requestFocus()
+        if (!topBarFocused && !dockFocused) tiles.getChildAt(index)?.requestFocus()
+    }
+
+    private fun toggleFavorite(app: InstalledApp) {
+        val current = arranged ?: return
+        val next = if (app in current.shown) current.hide(app) else current.show(app)
+        arrangements.save(next.arrangement)
+        arranged = next
+        shown = next.shown
+        renderCurrentPage(next)
+        (0 until tiles.childCount).firstOrNull { (tiles.getChildAt(it) as AppTileView).app == app }
+            ?.let { tiles.getChildAt(it)?.requestFocus() }
     }
 
     /** Without tiles, says why: nothing installed, or everything hidden (and where to show apps again). */
     private fun showWhyEmpty(arranged: ArrangedApps) {
+        if (page == Page.APPS) {
+            empty.text = getString(R.string.home_no_apps)
+            empty.visibility = if (arranged.shown.isEmpty() && arranged.hidden.isEmpty()) View.VISIBLE else View.GONE
+            return
+        }
         if (arranged.shown.isNotEmpty()) {
             empty.visibility = View.GONE
             return
         }
-        empty.text = if (arranged.hidden.isEmpty()) {
-            getString(R.string.home_no_apps)
-        } else {
-            getString(R.string.home_all_hidden, getString(SettingsR.string.settings_title), getString(SettingsR.string.settings_hide_apps))
-        }
+        empty.text = if (arranged.hidden.isEmpty()) getString(R.string.home_no_apps) else getString(R.string.home_all_hidden)
         empty.visibility = View.VISIBLE
     }
 

@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Merged into the window's content FrameLayout: one view level less to lay out and draw. -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/home_shell"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/home_dock"
+        android:layout_width="176dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:background="#FF1B141D">
+
+        <TextView
+            android:id="@+id/home_dock_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:drawableStart="@drawable/rabbit_mark"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:text="Rabbit TV"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/home_dock_home"
+            style="@style/RabbitDockEntry"
+            android:text="Inicio" />
+
+        <TextView
+            android:id="@+id/home_dock_apps"
+            style="@style/RabbitDockEntry"
+            android:text="Apps" />
+
+        <TextView
+            android:id="@+id/home_dock_settings"
+            style="@style/RabbitDockEntry"
+            android:text="Configuración" />
+    </LinearLayout>
 
     <!-- The top bar stays in place; the tiles scroll in the space below it. Left to right in every
          language: where the clock, the settings entry and the tiles go is for settings to decide,
@@ -8,8 +59,10 @@
          future carousel (a RecyclerView, say) doesn't mirror either. Texts still read in their
          own direction, lined up at the left (Theme.Luncher). -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/home_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layoutDirection="ltr"
         android:orientation="vertical">
 
@@ -27,6 +80,28 @@
             android:paddingLeft="@dimen/home_padding_horizontal"
             android:paddingTop="@dimen/home_padding_vertical"
             android:paddingRight="@dimen/home_padding_horizontal">
+
+            <TextView
+                android:id="@+id/home_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="28dp"
+                android:text="Rabbit TV"
+                android:textColor="@color/text_primary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/home_page_hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="24dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <!-- Time and date share a baseline, side by side in the order the appearance gives. -->
             <com.luncher.launcher.home.ClockView
@@ -107,6 +182,7 @@
             android:paddingRight="@dimen/home_padding_horizontal"
             android:paddingBottom="@dimen/home_padding_vertical" />
     </LinearLayout>
+    </LinearLayout>
 
     <com.luncher.launcher.home.OutlinedTextView
         android:id="@+id/home_empty"
@@ -118,4 +194,4 @@
         android:textSize="@dimen/home_empty_text"
         android:visibility="gone" />
 
-</merge>
+</FrameLayout>

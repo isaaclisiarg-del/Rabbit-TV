@@ -1,0 +1,5 @@
+<resources>
+    <color name="rabbit_mark_primary">#E4D0EA</color>
+    <color name="rabbit_mark_accent">#FF7449</color>
+    <color name="rabbit_mark_face">#FFFFFF</color>
+</resources>

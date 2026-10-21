@@ -42,6 +42,9 @@ import com.luncher.launcher.ui.R as UiR
  */
 internal class AppTilesView(context: Context, attrs: AttributeSet?) : ViewGroup(context, attrs) {
 
+    /** The active dock destination, reached from the first tile with D-pad Left. */
+    var navigateLeft: (() -> View?)? = null
+
     private val pixelsPerDp = resources.displayMetrics.density
     private val scroller = Scroller(context)
 
@@ -188,7 +191,10 @@ internal class AppTilesView(context: Context, attrs: AttributeSet?) : ViewGroup(
         val current = childCount == layoutTileCount && shownCount == layoutShownCount && tileGeometry == layoutGeometry
         if (arrow != null && index >= 0 && current) {
             // The focused tile itself where the focus stays, which moves nothing.
-            tileFocus.toward(index, arrow)?.let { return getChildAt(it) }
+            tileFocus.toward(index, arrow)?.let { next ->
+                if (next == index && arrow == Direction.LEFT) navigateLeft?.invoke()?.let { return it }
+                return getChildAt(next)
+            }
         }
         return super.focusSearch(focused, direction)
     }

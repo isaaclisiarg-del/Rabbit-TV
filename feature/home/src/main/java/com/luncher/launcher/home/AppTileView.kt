@@ -10,6 +10,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
+import android.graphics.Typeface
+import android.text.TextPaint
 import android.view.View
 import com.luncher.domain.apps.AppImages
 import com.luncher.domain.apps.InstalledApp
@@ -42,6 +44,15 @@ internal class AppTileView(
     /** The tile's bounds, and its frame's line, set with each new size. */
     private val bounds = RectF()
     private val frameBounds = RectF()
+    private val labelHeight = resources.getDimension(R.dimen.home_tile_label_height)
+    private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xD91B141D.toInt() }
+    private val labelTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = 0xFFFFFFFF.toInt()
+        textSize = resources.getDimension(R.dimen.home_tile_label_text)
+        typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+    }
+    var showLabel: Boolean = false
+    var labelText: String = app.label
 
     /** The user holds this tile, to move it. */
     var held = false
@@ -93,6 +104,16 @@ internal class AppTileView(
                 imagePaint.alpha = if (hidden) TilePaints.HIDDEN_ALPHA else TilePaints.OPAQUE
                 canvas.drawRoundRect(bounds, radius, radius, imagePaint)
             }
+        }
+        if (showLabel && width > 0 && height > 0) {
+            val bandTop = (height - labelHeight).coerceAtLeast(0f)
+            val radius = paints.cornerRadius(height)
+            canvas.drawRoundRect(0f, bandTop - radius, width.toFloat(), height.toFloat(), radius, radius, labelPaint)
+            canvas.save()
+            canvas.clipRect(12f, bandTop, width - 12f, height.toFloat())
+            val baseline = height - (labelHeight - labelTextPaint.textSize) / 2f - labelTextPaint.fontMetrics.bottom
+            canvas.drawText(labelText, 12f, baseline, labelTextPaint)
+            canvas.restore()
         }
         if (isFocused || held) {
             val frame = if (held) paints.heldFrame else paints.focusFrame

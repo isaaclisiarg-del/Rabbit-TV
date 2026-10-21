@@ -2,7 +2,7 @@
 
 Launcher ligero para Android TV / Google TV, con estética Lomiri Rabbit y navegación con control remoto.
 
-> Estado real: el código base de Luncher y los recursos de diseño Rabbit Sentinel V2 ya están en la rama `integration/luncher-base`. La implementación visual/funcional de Rabbit TV, la licencia de algunos recursos y el build siguen pendientes de validar. No se instaló ni modificó nada en la TV.
+> Estado real: Rabbit TV implementa Inicio, Apps y Configuración sobre Luncher en `integration/luncher-base`. El fondo nocturno aprobado con ciudad y conejo no está en el repositorio; se usa temporalmente el fondo berenjena liso. El APK no se compiló en esta entrega, por solicitud, y no se instaló ni modificó nada en la TV.
 
 ## Producto previsto
 
@@ -10,8 +10,8 @@ Launcher ligero para Android TV / Google TV, con estética Lomiri Rabbit y naveg
 - **Dock lateral:** tres destinos: Inicio · Apps · Configuración.
 - **Apps:** lista de aplicaciones TV disponibles, selección y reordenación de favoritas.
 - **Configuración:** Personalización para elegir fondo local y restaurar el fondo predeterminado. La política de almacenamiento queda pendiente de medir el espacio real de la TV.
-- **Identidad:** berenjena/violeta oscuro, superficies suaves y acento naranja. Los recursos Rabbit Sentinel V2 importados se describen como redibujos vectoriales de una lámina de referencia; comparar con el original y confirmar los derechos antes de empaquetarlos.
-- **Fondo:** estética nocturna 16:9 con cosmos violeta/naranja, ciudad iluminada y conejo descansando. El arte aprobado aún no está disponible en el repo.
+- **Identidad:** berenjena/violeta oscuro, superficies suaves, acento naranja e iconografía Rabbit Sentinel V2 disponible en el repositorio.
+- **Fondo:** el editor admite imágenes locales y las prepara al tamaño de pantalla. El arte nocturno 16:9 aprobado con ciudad espacial y conejo sigue pendiente; el color berenjena liso es temporal.
 
 La [especificación del producto](docs/PRODUCT_SPEC.md) detalla alcance, aceptación y decisiones abiertas.
 
@@ -24,9 +24,10 @@ Estado comprobado de la rama:
 - [x] Código base Luncher importado y rama existente.
 - [x] Recursos y notas de Rabbit Sentinel V2 presentes.
 - [x] Documentación de producto, rendimiento, checklist de TV y atribuciones añadida.
-- [ ] Validación de build: pendiente; no existe resultado de CI para esta rama y no se pudo clonar el repo en este entorno.
+- [ ] Validación de build: pendiente; esta entrega no generó APK para que se compile desde el PC del usuario.
 - [ ] Confirmar origen/licencia de Rabbit Sentinel V2 y del fondo definitivo.
-- [ ] Implementar y validar en emulador la experiencia de Inicio, Apps y Configuración de Rabbit TV.
+- [x] Implementadas las pantallas Inicio, Apps y Configuración, con favoritas, ordenación por control remoto y personalización del fondo.
+- [ ] Validar la experiencia en emulador o hardware de referencia.
 - [ ] Pruebas con TV física; todavía no se conectó ni instaló nada.
 
 ## Fluidez

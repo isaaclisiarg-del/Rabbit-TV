@@ -3,7 +3,7 @@
      translation, in values-<language>/, has every string here. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- The settings panel's title. -->
-    <string name="settings_title">Settings</string>
+    <string name="settings_title">Configuración</string>
     <!-- The entry that opens the list of apps to hide or show, and that list's title. -->
     <string name="settings_hide_apps">Hide apps</string>
     <!-- After an app's name in that list, while the app is hidden. -->
@@ -11,7 +11,7 @@
     <!-- Shown in that list when the device has no TV apps. -->
     <string name="settings_no_apps">No TV apps installed</string>
     <!-- The entry that opens the editor of the home screen's look, and that editor's title. -->
-    <string name="settings_appearance">Appearance</string>
+    <string name="settings_appearance">Personalización</string>
     <!-- In the appearance editor: the title of the options for the home screen's app tiles. -->
     <string name="settings_appearance_tiles">Tiles</string>
     <!-- In the appearance editor: the title of the options for the time and the date, in the bar
@@ -67,7 +67,7 @@
     <!-- Beside the Background entry: the name of a picture that has none. -->
     <string name="settings_appearance_picture">Picture</string>
     <!-- Beside the Background entry while the background has no picture. -->
-    <string name="settings_appearance_no_picture">None</string>
+    <string name="settings_appearance_no_picture">Fondo predeterminado</string>
     <!-- An option: how the picture covers the screen. Its values: Fill (keeping its shape, what
          doesn't fit cut off) and Stretch (all of it, its shape changed to the screen's). -->
     <string name="settings_appearance_fit">Fit</string>
@@ -96,7 +96,7 @@
     <string name="settings_appearance_arrow_previous" translatable="false">‹</string>
     <string name="settings_appearance_arrow_next" translatable="false">›</string>
     <!-- The last entry of the appearance editor: puts every option back to how it was at first. -->
-    <string name="settings_appearance_reset">Reset to defaults</string>
+    <string name="settings_appearance_reset">Restablecer opciones</string>
     <!-- The entry that opens the device's own settings. -->
     <string name="settings_system">System settings</string>
     <!-- A message, when the device has no settings app to open. -->
@@ -106,7 +106,7 @@
          pictures, how to rename or delete one; OK is the remote's button. -->
     <string name="settings_background_hint">Hold OK on a picture to rename or delete it</string>
     <!-- Its last entry: stores the picture and options chosen, which the editor only shows until then. -->
-    <string name="settings_background_save">Save</string>
+    <string name="settings_background_save">Guardar</string>
     <!-- Beside Save, in red: deletes every picture of the library, after a question. -->
     <string name="settings_background_delete_all">Delete all</string>
     <!-- That question; below it, what deleting them does and doesn't do, with how many; then the
@@ -211,11 +211,11 @@
     <string name="settings_pictures_folder_path" translatable="false">Android/media/%1$s</string>
     <!-- The tile at the end of the pictures, and an entry, that open the list of pictures in that
          folder; and that list's title. -->
-    <string name="settings_pictures_add_from_folder">Add from folder</string>
+    <string name="settings_pictures_add_from_folder">Elegir desde carpeta local</string>
     <!-- A picture's width and height in pixels, and its file's size. -->
     <string name="settings_pictures_details"><xliff:g id="width" example="1920">%1$d</xliff:g> × <xliff:g id="height" example="1080">%2$d</xliff:g> · <xliff:g id="size" example="3.1 MB">%3$s</xliff:g></string>
     <!-- Choosing the wallpaper, the first tile: no picture, the plain background. -->
-    <string name="settings_pictures_no_picture">No picture</string>
+    <string name="settings_pictures_no_picture">Fondo predeterminado</string>
     <!-- The name of a picture whose app gave it none. -->
     <string name="settings_pictures_unnamed">Picture</string>
     <!-- An action on a picture, and the answer that confirms it. -->

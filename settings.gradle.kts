@@ -16,5 +16,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Luncher"
+rootProject.name = "Rabbit TV"
 include(":app", ":domain", ":ui", ":platform", ":feature:home", ":feature:settings")

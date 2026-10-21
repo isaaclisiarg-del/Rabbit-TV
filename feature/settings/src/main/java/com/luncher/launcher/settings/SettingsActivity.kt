@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.luncher.domain.settings.SettingsEntry
-import com.luncher.domain.settings.settingsMenu
 
 /**
  * The settings panel: a floating window over the home screen that lists the entries of
@@ -27,7 +26,7 @@ class SettingsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
         entries = findViewById(R.id.settings_entries)
-        show(settingsMenu())
+        show(listOf(SettingsEntry.Appearance))
         // The entries scroll on a screen too short for them all.
         val scroll = findViewById<View>(R.id.settings_entries_scroll)
         scroll.layoutParams.height = 0
