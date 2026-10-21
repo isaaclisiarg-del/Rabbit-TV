@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
@@ -145,6 +146,7 @@ class HomeActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+        HomeOverrideRuntime.lastHomeResumedAt = SystemClock.elapsedRealtime()
         // Paused and resumed while arranging (a system dialog came and went): the tiles are the
         // user's work in progress, so the apps are read again only when the mode ends.
         if (!arrange.active) refresh()

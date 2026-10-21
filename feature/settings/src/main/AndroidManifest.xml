@@ -22,7 +22,7 @@
             android:theme="@style/Theme.Luncher.Settings" />
         <activity
             android:name=".HomeOverrideSettingsActivity"
-            android:exported="false"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.Luncher.Settings.FullScreen" />

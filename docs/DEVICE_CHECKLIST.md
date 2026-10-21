@@ -79,7 +79,10 @@ Este checklist es para una sesión futura, con el usuario presente y después de
 - [ ] Activar «Usar Rabbit TV como inicio» y habilitar Rabbit TV manualmente en Ajustes → Accesibilidad.
 - [ ] Probar Home desde YouTube, Spotify y otras apps; confirmar que no se interrumpe la reproducción ni se redirigen ajustes o diálogos.
 - [ ] Repetir después de reiniciar; confirmar Chromecast, Wi-Fi, HDMI y el control remoto.
-- [ ] Pulsar «Restaurar inicio original» y confirmar que vuelve a abrirse Google TV Home.
+- [ ] Pulsar «Restaurar inicio original» y seleccionar explícitamente Google TV Home si aparece el selector de Home. En algunos firmwares se abre Ajustes generales; la app no puede cambiar sola el HOME predeterminado.
+- [ ] Verificar que el servicio detiene automáticamente la redirección si tres aperturas no consiguen activar Rabbit TV en 90 s, o si detecta seis redirecciones en 30 s. Comprobar el aviso de parada de seguridad y la recuperación manual.
+- [ ] Verificar desde los ajustes de accesibilidad que «Configurar» abre las opciones de Rabbit TV.
+- [ ] Confirmar que LauncherX existe como `com.google.android.apps.tv.launcherx`; si el modelo usa otro paquete, la opción se deshabilita sin interceptar otras apps.
 - [ ] Mantener habilitados LauncherX (com.google.android.apps.tv.launcherx), SetupWraith (com.google.android.tungsten.setupwraith) y Google MediaShell (com.google.android.apps.mediashell).
 - [ ] No declarar la sustitución operativa sin medirla en el televisor. El inicio de una Activity desde un servicio en segundo plano está sujeto a las restricciones y excepciones de Android; el resultado puede variar según el firmware. Si Rabbit TV no pasa al frente, registrar el mensaje de ActivityTaskManager/Logcat y dejar la sustitución desactivada.
 
