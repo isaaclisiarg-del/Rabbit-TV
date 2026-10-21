@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Package visibility (API 30+): SharePictureActivity must see every home app to tell
+         whether Luncher is the default one; else Android hides the stock launcher from it, and
+         Luncher alone seems the default. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+        </intent>
+    </queries>
+
+    <!-- As the app declares it, so the JVM tests, which have no app manifest, follow a
+         right-to-left language as the app does. -->
+    <application android:supportsRtl="true">
+
+        <!-- The settings panel, floating over the home screen. No screenOrientation: Android 8.0
+             refuses one on a floating activity, which shows over the landscape home screen anyway. -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Luncher.Settings" />
+
+        <!-- The settings panel's list of apps to hide or show, in the panel's place. -->
+        <activity
+            android:name=".HideAppsActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Luncher.Settings.Panel" />
+
+        <!-- The editor of the home screen's appearance, opened from the settings panel:
+             full-screen, over the home screen and the panel. -->
+        <activity
+            android:name=".AppearanceActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Luncher.Settings.FullScreen" />
+
+        <!-- The background editor, full-screen like the appearance editor, which opens it; also
+             opened from the window after a share, with that picture chosen. -->
+        <activity
+            android:name=".BackgroundActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Luncher.Settings.FullScreen" />
+
+        <!-- The window over the home screen after another app shared pictures, floating like the
+             settings panel. singleTop: a share that arrives while it shows comes to it
+             (onNewIntent), its pictures joining those being added, rather than to a new window,
+             which would replace it and stop them. -->
+        <activity
+            android:name=".PictureReceivedActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Luncher.Settings" />
+
+        <!-- The pictures in the drop folders, opened from the background editor. -->
+        <activity
+            android:name=".AddFromFolderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Luncher.Settings.Pictures" />
+
+        <!-- Where another app's Share of pictures (or "Set as" of one) arrives: no screen of its
+             own, it opens the home screen and, over it, the window that adds the pictures (only
+             the window while one shows already), and finishes at once. Exported, so any app can send it anything; its intent filters are the app's
+             to declare, in its manifest, which the build merges with this one. No task affinity:
+             sent to a task of its own, it opens in a task that's gone as it finishes, the home
+             screen and the window in Luncher's own (both sent there, by its affinity). With
+             Luncher's, the task its share made would be rooted at that share, and Android would
+             only bring that task back for the next one alike (a SEND of the same type, sent to a
+             task of its own), never starting this activity. -->
+        <activity
+            android:name=".SharePictureActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Luncher.Settings.Pictures.NoDisplay" />
+    </application>
+
+</manifest>
