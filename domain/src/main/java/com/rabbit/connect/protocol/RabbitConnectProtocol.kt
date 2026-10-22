@@ -45,7 +45,7 @@ object RabbitConnectProtocol {
         onAuthenticated: () -> Unit = {},
         onMessage: (ByteArray) -> ByteArray?,
     ) {
-        socket.soTimeout = 8_000
+        socket.soTimeout = 60_000
         val input = DataInputStream(socket.getInputStream())
         val output = DataOutputStream(socket.getOutputStream())
         val request = input.readUnsignedByte()
@@ -99,7 +99,7 @@ object RabbitConnectProtocol {
     fun connect(socket: Socket, keys: RabbitConnectKeyStore, pairingCode: String?): SecureChannel {
         val saved = keys.load()
         if (saved == null) require(isValidPairingCode(pairingCode)) { "Enter the temporary TV pairing code" }
-        socket.soTimeout = 8_000
+        socket.soTimeout = 60_000
         val input = DataInputStream(socket.getInputStream())
         val output = DataOutputStream(socket.getOutputStream())
         if (saved == null) {
