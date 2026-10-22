@@ -5,8 +5,8 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
+import android.content.pm.PackageManager
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import android.widget.Switch
@@ -19,7 +19,7 @@ class HomeOverrideSettingsActivity : Activity() {
 
     private lateinit var enabledSwitch: Switch
     private lateinit var status: TextView
-    private var updatingSwitch = false
+    private lateinit var defaultStatus: TextView
     private val preferences by lazy {
         getSharedPreferences(HomeOverridePreferences.FILE_NAME, MODE_PRIVATE)
     }
@@ -29,15 +29,10 @@ class HomeOverrideSettingsActivity : Activity() {
         setContentView(R.layout.settings_home_override)
         enabledSwitch = findViewById(R.id.home_override_enabled)
         status = findViewById(R.id.home_override_status)
+        defaultStatus = findViewById(R.id.home_override_default_status)
         enabledSwitch.isChecked = preferences.getBoolean(HomeOverridePreferences.KEY_ENABLED, false)
         enabledSwitch.setOnCheckedChangeListener { _, enabled ->
-            if (updatingSwitch) return@setOnCheckedChangeListener
-            preferences.edit()
-                .putBoolean(HomeOverridePreferences.KEY_ENABLED, enabled)
-                .putBoolean(HomeOverridePreferences.KEY_SAFETY_STOP, false)
-                .putInt(HomeOverridePreferences.KEY_FAILED_ATTEMPTS, 0)
-                .remove(HomeOverridePreferences.KEY_LAST_FAILURE_AT)
-                .apply()
+            preferences.edit().putBoolean(HomeOverridePreferences.KEY_ENABLED, enabled).apply()
             showStatus()
         }
         findViewById<TextView>(R.id.home_override_configure).setOnClickListener {
@@ -47,45 +42,27 @@ class HomeOverrideSettingsActivity : Activity() {
                 Toast.makeText(this, R.string.settings_system_unavailable, Toast.LENGTH_SHORT).show()
             }
         }
+        findViewById<TextView>(R.id.home_override_choose_home).setOnClickListener { openHomeSelector() }
         findViewById<TextView>(R.id.home_override_restore).setOnClickListener {
-            // Stop intercepting first, even if the vendor doesn't expose a Home chooser.
-            preferences.edit()
-                .putBoolean(HomeOverridePreferences.KEY_ENABLED, false)
-                .putBoolean(HomeOverridePreferences.KEY_SAFETY_STOP, false)
-                .putInt(HomeOverridePreferences.KEY_FAILED_ATTEMPTS, 0)
-                .apply()
-            syncEnabledSwitch()
+            preferences.edit().putBoolean(HomeOverridePreferences.KEY_ENABLED, false).apply()
+            enabledSwitch.isChecked = false
             status.setText(R.string.home_override_restored)
-            // Changing Android's default HOME requires an explicit user selection.
-            try {
-                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
-            } catch (exception: RuntimeException) {
-                try {
-                    startActivity(Intent(Settings.ACTION_SETTINGS))
-                } catch (fallback: RuntimeException) {
-                    Toast.makeText(this, R.string.home_override_chooser_unavailable, Toast.LENGTH_LONG).show()
-                }
-            }
+            openHomeSelector()
         }
     }
 
     override fun onResume() {
         super.onResume()
         if (::status.isInitialized) {
-            syncEnabledSwitch()
             showStatus()
+            showDefaultHome()
         }
     }
 
     private fun showStatus() {
         val serviceEnabled = isServiceEnabled()
         val redirectEnabled = preferences.getBoolean(HomeOverridePreferences.KEY_ENABLED, false)
-        val launcherAvailable = isLauncherXInstalled()
-        enabledSwitch.isEnabled = launcherAvailable
         val message = when {
-            !launcherAvailable -> R.string.home_override_launcher_missing
-            preferences.getBoolean(HomeOverridePreferences.KEY_SAFETY_STOP, false) ->
-                R.string.home_override_safety_stop
             !serviceEnabled -> if (redirectEnabled) {
                 R.string.home_override_permission_pending
             } else {
@@ -97,19 +74,48 @@ class HomeOverrideSettingsActivity : Activity() {
         status.setText(message)
     }
 
-    private fun syncEnabledSwitch() {
-        updatingSwitch = true
-        try {
-            enabledSwitch.isChecked = preferences.getBoolean(HomeOverridePreferences.KEY_ENABLED, false)
-        } finally {
-            updatingSwitch = false
+    private fun showDefaultHome() {
+        val homeIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
+        val resolved = try {
+            packageManager.resolveActivity(homeIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        } catch (_: RuntimeException) {
+            null
+        }
+        val activity = resolved?.activityInfo
+        when {
+            activity == null -> defaultStatus.setText(R.string.home_override_default_unavailable)
+            activity.packageName == packageName -> defaultStatus.setText(R.string.home_override_default_rabbit)
+            activity.name.contains("ResolverActivity") || activity.name.contains("ChooserActivity") ->
+                defaultStatus.setText(R.string.home_override_default_unavailable)
+            else -> {
+                val appName = try {
+                    packageManager.getApplicationLabel(packageManager.getApplicationInfo(activity.packageName, 0))
+                } catch (_: PackageManager.NameNotFoundException) {
+                    activity.loadLabel(packageManager)
+                }
+                defaultStatus.text = getString(R.string.home_override_default_named, appName)
+            }
         }
     }
 
-    private fun isLauncherXInstalled(): Boolean = try {
-        packageManager.getApplicationInfo(HomeOverridePreferences.GOOGLE_TV_LAUNCHER_PACKAGE, 0).enabled
-    } catch (exception: PackageManager.NameNotFoundException) {
-        false
+    private fun openHomeSelector() {
+        try {
+            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            return
+        } catch (_: ActivityNotFoundException) {
+            // Older and vendor TV firmware may omit the HOME settings page.
+        } catch (_: SecurityException) {
+            // Fall back to the system HOME resolver when the settings page is restricted.
+        }
+        try {
+            startActivity(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME))
+        } catch (_: ActivityNotFoundException) {
+            try {
+                startActivity(Intent(Settings.ACTION_SETTINGS))
+            } catch (_: ActivityNotFoundException) {
+                Toast.makeText(this, R.string.settings_system_unavailable, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun isServiceEnabled(): Boolean {

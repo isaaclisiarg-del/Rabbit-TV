@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
@@ -149,8 +148,6 @@ class HomeActivity : Activity() {
         // Paused and resumed while arranging (a system dialog came and went): the tiles are the
         // user's work in progress, so the apps are read again only when the mode ends.
         if (!arrange.active) refresh()
-        // Acknowledge only after the home view has resumed and refreshed successfully.
-        HomeOverrideRuntime.lastHomeResumedAt = SystemClock.elapsedRealtime()
     }
 
     // Home while the home screen is in front.
@@ -169,7 +166,8 @@ class HomeActivity : Activity() {
     private fun refresh() {
         val installed = installedApps.tvApps()
         var saved = arrangements.read()
-        if (saved.order == null && saved.hidden.isEmpty()) {
+        val order = saved.order
+        if (order == null && saved.hidden.isEmpty()) {
             val candidates = installed.asSequence()
                 .filter { app -> app.launchable.packageName != packageName && isInitialFavorite(app) }
                 .sortedBy(::initialFavoriteOrder)
@@ -184,8 +182,8 @@ class HomeActivity : Activity() {
             )
             arrangements.save(saved)
         }
-        if (saved.order != null) {
-            val accountedFor = (saved.order + saved.hidden).toHashSet()
+        if (order != null) {
+            val accountedFor = (order + saved.hidden).toHashSet()
             val newApps = installed.asSequence()
                 .filter { it.launchable.packageName != packageName && it.launchable !in accountedFor }
                 .map { it.launchable }
@@ -242,7 +240,7 @@ class HomeActivity : Activity() {
                 findViewById<TextView>(R.id.home_title).text = getString(R.string.rabbit_tv_title)
                 pageHint.visibility = View.GONE
                 findViewById<View>(R.id.home_empty).visibility = View.GONE
-                show(arranged.shown, favorites, showLabels = true)
+                show(arranged.shown, favorites)
             }
             Page.APPS -> {
                 findViewById<TextView>(R.id.home_title).text = getString(R.string.rabbit_tv_apps_title)
@@ -251,7 +249,7 @@ class HomeActivity : Activity() {
                 val allApps = (arranged.shown + arranged.hidden)
                     .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.label })
                 findViewById<View>(R.id.home_empty).visibility = if (allApps.isEmpty()) View.VISIBLE else View.GONE
-                show(allApps, favorites, showLabels = true)
+                show(allApps, favorites)
             }
         }
     }
@@ -268,13 +266,16 @@ class HomeActivity : Activity() {
     private fun setDockSelected(entry: TextView, selected: Boolean) {
         entry.isSelected = selected
         val density = resources.displayMetrics.density
+        val focused = entry.hasFocus()
         entry.background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            cornerRadius = density * 14f
-            setColor(if (selected || entry.hasFocus()) 0x33FF7449 else Color.TRANSPARENT)
-            if (entry.hasFocus()) setStroke((density * 2).toInt(), 0xFFFF7449.toInt())
+            cornerRadius = density * 12f
+            setColor(if (selected) 0x664B3150 else if (focused) 0x334B3150 else Color.TRANSPARENT)
+            if (selected || focused) setStroke((density * if (focused) 2 else 1).toInt(), 0xCCFF7449.toInt())
         }
-        entry.setTextColor(if (selected || entry.hasFocus()) 0xFFFF9A77.toInt() else Color.WHITE)
+        entry.compoundDrawablesRelative.filterNotNull().forEach { drawable ->
+            drawable.mutate().setTint(if (selected || focused) 0xFFFF9A77.toInt() else Color.WHITE)
+        }
     }
 
     private fun show(appearance: Appearance) {
@@ -295,7 +296,7 @@ class HomeActivity : Activity() {
         }
     }
 
-    private fun show(apps: List<InstalledApp>, favorites: Set<LaunchableApp>, showLabels: Boolean) {
+    private fun show(apps: List<InstalledApp>, favorites: Set<LaunchableApp>) {
         val focused = (tiles.focusedChild as? AppTileView)?.app?.launchable
         // If focus is on a dock or header item, leave it there; otherwise restore the focused tile.
         val topBarFocused = topBar.hasFocus()
@@ -310,11 +311,8 @@ class HomeActivity : Activity() {
                 if (page == Page.HOME) open(selected) else toggleFavorite(selected)
             }
             tile.setOnLongClickListener(if (page == Page.HOME) startArranging else null)
-            tile.showLabel = showLabels
+            tile.favorite = app.launchable in favorites
             tile.hidden = app.launchable !in favorites
-            tile.labelText = if (page == Page.APPS) {
-                (if (app.launchable in favorites) "✓ " else "＋ ") + app.label
-            } else app.label
             tile.contentDescription = when {
                 page == Page.APPS && app.launchable in favorites -> "${app.label}, favorita"
                 page == Page.APPS -> "${app.label}, no favorita. Pulsa OK para añadirla a Inicio"

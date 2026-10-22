@@ -14,43 +14,33 @@
 
     <LinearLayout
         android:id="@+id/home_dock"
-        android:layout_width="176dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:paddingStart="20dp"
+        android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
         android:background="#FF1B141D">
 
         <TextView
-            android:id="@+id/home_dock_brand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="28dp"
-            android:drawableStart="@drawable/rabbit_mark"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:text="Rabbit TV"
-            android:textColor="@color/text_primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/home_dock_home"
             style="@style/RabbitDockEntry"
-            android:text="Inicio" />
+            android:contentDescription="@string/home_dock_home"
+            android:drawableTop="@drawable/dock_home" />
 
         <TextView
             android:id="@+id/home_dock_apps"
             style="@style/RabbitDockEntry"
-            android:text="Apps" />
+            android:contentDescription="@string/home_dock_apps"
+            android:drawableTop="@drawable/dock_apps" />
 
         <TextView
             android:id="@+id/home_dock_settings"
             style="@style/RabbitDockEntry"
-            android:text="Configuración" />
+            android:contentDescription="@string/home_dock_settings"
+            android:drawableTop="@drawable/dock_settings" />
     </LinearLayout>
 
     <!-- The top bar stays in place; the tiles scroll in the space below it. Left to right in every
@@ -80,16 +70,6 @@
             android:paddingLeft="@dimen/home_padding_horizontal"
             android:paddingTop="@dimen/home_padding_vertical"
             android:paddingRight="@dimen/home_padding_horizontal">
-
-            <TextView
-                android:id="@+id/home_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="28dp"
-                android:text="Rabbit TV"
-                android:textColor="@color/text_primary"
-                android:textSize="30sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/home_page_hint"
@@ -128,6 +108,16 @@
                     android:textColor="@color/text_secondary"
                     android:textSize="@dimen/home_date_text" />
             </com.luncher.launcher.home.ClockView>
+
+            <TextView
+                android:id="@+id/home_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text="Rabbit TV"
+                android:textColor="@color/text_primary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <!-- As tall as the settings entry it replaces, so the tiles below stay where they are.
                  What the hint leaves of the bar: where a language's title and hint don't both

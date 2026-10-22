@@ -4,6 +4,9 @@
     <string name="rabbit_tv_title">Rabbit TV</string>
     <string name="rabbit_tv_apps_title">Apps</string>
     <string name="rabbit_tv_apps_hint">OK: agregar o quitar favorita · Inicio: mantener OK para ordenar</string>
+    <string name="home_dock_home">Inicio</string>
+    <string name="home_dock_apps">Apps</string>
+    <string name="home_dock_settings">Configuración</string>
     <!-- Shown in place of the tiles when the device has no TV apps. -->
     <string name="home_no_apps">No hay aplicaciones compatibles con TV instaladas</string>
     <!-- Shown in place of the tiles when every app is hidden. The settings panel's title and its

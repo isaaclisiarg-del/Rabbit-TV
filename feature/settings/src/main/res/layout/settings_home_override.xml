@@ -26,6 +26,12 @@
         android:textColor="@color/text_secondary"
         android:textSize="@dimen/settings_pictures_small_text" />
 
+    <TextView
+        android:id="@+id/home_override_choose_home"
+        style="@style/RabbitSettingsEntry"
+        android:layout_marginBottom="16dp"
+        android:text="@string/home_override_choose_home" />
+
     <Switch
         android:id="@+id/home_override_enabled"
         android:layout_width="match_parent"
@@ -51,6 +57,24 @@
 
     <TextView
         android:id="@+id/home_override_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:accessibilityLiveRegion="polite"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/settings_pictures_text" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/home_override_default_title"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/settings_pictures_small_text"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/home_override_default_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

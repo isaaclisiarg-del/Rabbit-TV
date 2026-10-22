@@ -21,6 +21,11 @@ internal class TilePaints(context: Context) {
     /** A held tile's frame, while the user arranges apps. */
     val heldFrame = frame(context.color(UiR.color.text_primary), context)
 
+    /** A quiet accent around favorite apps when they are not focused. */
+    val favoriteFrame = frame(0xB3FF7449.toInt(), context).apply {
+        strokeWidth = context.resources.displayMetrics.density
+    }
+
     /** Draws a hidden app's image, dimmed. */
     val dim = Paint().apply { alpha = HIDDEN_ALPHA }
 
