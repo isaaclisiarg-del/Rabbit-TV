@@ -116,7 +116,10 @@
     <string name="home_override_permission_pending">Permiso pendiente: habilita Rabbit TV en los ajustes de accesibilidad.</string>
     <string name="home_override_service_enabled_off">Servicio habilitado; sustitución desactivada.</string>
     <string name="home_override_unverified">Servicio habilitado. Sustitución activada; funcionamiento sin verificar en este televisor.</string>
-    <string name="home_override_restored">Sustitución desactivada. Google TV Home conserva el control del botón Inicio.</string>
+    <string name="home_override_restored">Redirección desactivada. Si Rabbit TV era el inicio predeterminado, elegí Google TV Home en los ajustes del sistema.</string>
+    <string name="home_override_launcher_missing">No se encontró LauncherX en este televisor. La redirección por accesibilidad no es compatible con este launcher.</string>
+    <string name="home_override_safety_stop">Redirección desactivada automáticamente: Android no confirmó los últimos intentos de apertura o detectamos un ciclo de inicio. Podés volver a activarla manualmente después de revisar la TV.</string>
+    <string name="home_override_chooser_unavailable">No se pudo abrir el selector de pantalla de inicio. Cambiá el launcher desde los ajustes del dispositivo.</string>
     <!-- A message, when the device has no settings app to open. -->
     <string name="settings_system_unavailable">No settings app on this device</string>
 

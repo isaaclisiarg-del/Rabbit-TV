@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
@@ -148,6 +149,8 @@ class HomeActivity : Activity() {
         // Paused and resumed while arranging (a system dialog came and went): the tiles are the
         // user's work in progress, so the apps are read again only when the mode ends.
         if (!arrange.active) refresh()
+        // Acknowledge only after the home view has resumed and refreshed successfully.
+        HomeOverrideRuntime.lastHomeResumedAt = SystemClock.elapsedRealtime()
     }
 
     // Home while the home screen is in front.
@@ -266,16 +269,13 @@ class HomeActivity : Activity() {
     private fun setDockSelected(entry: TextView, selected: Boolean) {
         entry.isSelected = selected
         val density = resources.displayMetrics.density
-        val focused = entry.hasFocus()
         entry.background = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            cornerRadius = density * 12f
-            setColor(if (selected) 0x664B3150 else if (focused) 0x334B3150 else Color.TRANSPARENT)
-            if (selected || focused) setStroke((density * if (focused) 2 else 1).toInt(), 0xCCFF7449.toInt())
+            cornerRadius = density * 14f
+            setColor(if (selected || entry.hasFocus()) 0x33FF7449 else Color.TRANSPARENT)
+            if (entry.hasFocus()) setStroke((density * 2).toInt(), 0xFFFF7449.toInt())
         }
-        entry.compoundDrawablesRelative.filterNotNull().forEach { drawable ->
-            drawable.mutate().setTint(if (selected || focused) 0xFFFF9A77.toInt() else Color.WHITE)
-        }
+        entry.setTextColor(if (selected || entry.hasFocus()) 0xFFFF9A77.toInt() else Color.WHITE)
     }
 
     private fun show(appearance: Appearance) {
