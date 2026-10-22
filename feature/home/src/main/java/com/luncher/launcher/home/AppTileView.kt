@@ -5,8 +5,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapShader
+import android.graphics.Color
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
@@ -38,11 +40,28 @@ internal class AppTileView(
 
     /** Fills the tile's rounded shape with [image]; its shader is made with each new image. */
     private val imagePaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+    private val favoriteBadgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFFF7449.toInt() }
+    private val favoriteCheckPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.WHITE
+        style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
+        strokeJoin = Paint.Join.ROUND
+        strokeWidth = 2.5f * resources.displayMetrics.density
+    }
+    private val favoriteCheckPath = Path()
 
     /** The tile's bounds, and its frame's line, set with each new size. */
     private val bounds = RectF()
     private val frameBounds = RectF()
     var favorite: Boolean = false
+
+    /** Mark favorites with a check in the all-apps page. */
+    var favoriteCheckVisible: Boolean = false
+        set(value) {
+            if (field == value) return
+            field = value
+            invalidate()
+        }
 
     /** The user holds this tile, to move it. */
     var held = false
@@ -100,12 +119,29 @@ internal class AppTileView(
             val frameRadius = (radius - frame.strokeWidth / 2).coerceAtLeast(0f)
             canvas.drawRoundRect(frameBounds, frameRadius, frameRadius, frame)
         }
+        if (favorite && favoriteCheckVisible) drawFavoriteCheck(canvas)
         if (isFocused || held) {
             val frame = if (held) paints.heldFrame else paints.focusFrame
             // The line's middle runs half its width inside the edge, its corners as much tighter.
             val frameRadius = (radius - frame.strokeWidth / 2).coerceAtLeast(0f)
             canvas.drawRoundRect(frameBounds, frameRadius, frameRadius, frame)
         }
+    }
+
+    private fun drawFavoriteCheck(canvas: Canvas) {
+        val density = resources.displayMetrics.density
+        val size = 30f * density
+        val inset = 8f * density
+        val left = width - inset - size
+        val top = inset
+        val badge = RectF(left, top, left + size, top + size)
+        canvas.drawRoundRect(badge, 9f * density, 9f * density, favoriteBadgePaint)
+
+        favoriteCheckPath.reset()
+        favoriteCheckPath.moveTo(left + 7.5f * density, top + 15.5f * density)
+        favoriteCheckPath.lineTo(left + 12.5f * density, top + 20.5f * density)
+        favoriteCheckPath.lineTo(left + 22.5f * density, top + 10f * density)
+        canvas.drawPath(favoriteCheckPath, favoriteCheckPaint)
     }
 
     override fun onFocusChanged(gainFocus: Boolean, direction: Int, previouslyFocusedRect: Rect?) {

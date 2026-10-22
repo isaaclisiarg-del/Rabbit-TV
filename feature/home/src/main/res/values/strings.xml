@@ -3,7 +3,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="rabbit_tv_title">Rabbit TV</string>
     <string name="rabbit_tv_apps_title">Apps</string>
-    <string name="rabbit_tv_apps_hint">OK: agregar o quitar favorita · Inicio: mantener OK para ordenar</string>
+    <string name="rabbit_tv_apps_hint">OK: abrir · Mantener OK o Menú: fijar o quitar de Inicio</string>
     <string name="home_dock_home">Inicio</string>
     <string name="home_dock_apps">Apps</string>
     <string name="home_dock_settings">Configuración</string>

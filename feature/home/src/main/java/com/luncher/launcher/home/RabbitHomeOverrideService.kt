@@ -59,7 +59,7 @@ class RabbitHomeOverrideService : AccessibilityService() {
         if (pendingRequestAt != 0L || now - lastRequestAt < REQUEST_COOLDOWN_MS) return
         lastRequestAt = now
 
-        while (!recentRequests.isEmpty() && now - recentRequests.peekFirst() > REQUEST_WINDOW_MS) {
+        while (recentRequests.peekFirst()?.let { now - it > REQUEST_WINDOW_MS } == true) {
             recentRequests.removeFirst()
         }
         if (recentRequests.size >= MAX_REQUESTS_IN_WINDOW) {
@@ -126,8 +126,8 @@ class RabbitHomeOverrideService : AccessibilityService() {
 
     private companion object {
         const val TAG = "RabbitHomeOverride"
-        const val REQUEST_COOLDOWN_MS = 1_500L
-        const val VERIFY_DELAY_MS = 4_000L
+        const val REQUEST_COOLDOWN_MS = 400L
+        const val VERIFY_DELAY_MS = 1_000L
         const val MAX_FAILED_ATTEMPTS = 3
         const val FAILURE_WINDOW_MS = 90_000L
         const val REQUEST_WINDOW_MS = 30_000L
