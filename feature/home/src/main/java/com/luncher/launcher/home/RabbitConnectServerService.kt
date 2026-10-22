@@ -72,7 +72,7 @@ class RabbitConnectServerService : Service() {
                 pairingCode()
             }
         }
-        if (worker == null) {
+        if (worker?.isAlive != true) {
             running = true
             worker = Thread(::serverLoop, "RabbitConnectServer").apply { isDaemon = true; start() }
         }

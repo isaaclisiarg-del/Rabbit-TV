@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import android.widget.Switch
@@ -23,6 +24,7 @@ class RabbitConnectSettingsActivity : Activity() {
     private lateinit var ip: TextView
     private lateinit var code: TextView
     private var updating = false
+    private var lastCodeRefreshRequestAt = 0L
     private val handler = Handler(Looper.getMainLooper())
     private val refresh = object : Runnable {
         override fun run() {
@@ -122,8 +124,18 @@ class RabbitConnectSettingsActivity : Activity() {
         val paired = prefs.getBoolean(RabbitConnectPreferences.KEY_PAIRED, false)
         val expires = prefs.getLong(RabbitConnectPreferences.KEY_CODE_EXPIRES_AT, 0L)
         val tempCode = prefs.getString(RabbitConnectPreferences.KEY_PAIRING_CODE, null).orEmpty()
+        val codeValid = tempCode.isNotBlank() && expires > System.currentTimeMillis()
         code.text = if (paired) getString(R.string.rabbit_connect_paired)
-            else getString(R.string.rabbit_connect_code, if (expires > System.currentTimeMillis()) tempCode else getString(R.string.rabbit_connect_code_refreshing))
+            else getString(R.string.rabbit_connect_code, if (codeValid) tempCode else getString(R.string.rabbit_connect_code_refreshing))
+        if (!paired && prefs.getBoolean(RabbitConnectPreferences.KEY_ENABLED, false) && !codeValid &&
+            SystemClock.elapsedRealtime() - lastCodeRefreshRequestAt >= CODE_REFRESH_RETRY_MS) {
+            lastCodeRefreshRequestAt = SystemClock.elapsedRealtime()
+            startServiceAction(RabbitConnectPreferences.ACTION_START)
+        }
+    }
+
+    companion object {
+        private const val CODE_REFRESH_RETRY_MS = 5_000L
     }
 
     private fun accessibilityEnabled(): Boolean {
