@@ -326,105 +326,89 @@ class HomeActivity : Activity() {
             tile.favorite = app.launchable in favorites
             // Only the arranging shelf dims hidden apps; normal app browsing keeps every banner clear.
             tile.hidden = false
-            tile.favo}|ï«h‘éì¶»§q«^v                .remove(HomeOverridePreferences.KEY_LAST_FAILURE_AT)
-                .apply()
-        } else {
-            recordFailedAttempt()
+            tile.favoriteCheckVisible = page == Page.APPS && tile.favorite
+            tile.contentDescription = when {
+                page == Page.APPS && app.launchable in favorites -> "${app.label}, agregada a Inicio"
+                page == Page.APPS -> "${app.label}, no estÃ¡ en Inicio. Pulsa OK para aÃ±adirla"
+                else -> app.label
+            }
+            tile.invalidate()
+            if (tile.id == View.NO_ID) tile.id = View.generateViewId()
+            tiles.addView(tile)
         }
+        tiles.getChildAt(0)?.id?.let { firstTileId ->
+            homeEntry.nextFocusRightId = firstTileId
+            appsEntry.nextFocusRightId = firstTileId
+        }
+        shown = apps
+        val index = apps.indexOfFirst { it.launchable == focused }.coerceAtLeast(0)
+        if (!topBarFocused && !dockFocused) tiles.getChildAt(index)?.requestFocus()
     }
 
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        if (event?.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
-        if (event.packageName?.toString() != HomeOverridePreferences.GOOGLE_TV_LAUNCHER_PACKAGE) return
-        if (!preferences.getBoolean(HomeOverridePreferences.KEY_ENABLED, false)) return
+    private fun toggleFavorite(app: InstalledApp) {
+        val current = arranged ?: return
+        val next = if (app in current.shown) current.hide(app) else current.show(app)
+        arrangements.save(next.arrangement)
+        arranged = next
+        shown = next.shown
+        renderCurrentPage(next)
+        (0 until tiles.childCount).firstOrNull { (tiles.getChildAt(it) as AppTileView).app == app }
+            ?.let { tiles.getChildAt(it)?.requestFocus() }
+    }
 
-        // Never redirect from a system dialog, launcher menu or launcher settings surface.
-        val className = event.className?.toString().orEmpty().lowercase(Locale.ROOT)
-        if (className.contains("dialog") || className.contains("popup") ||
-            className.contains("settings") || className.contains("menu")
-        ) return
-
-        val now = SystemClock.elapsedRealtime()
-        if (pendingRequestAt != 0L || now - lastRequestAt < REQUEST_COOLDOWN_MS) return
-        lastRequestAt = now
-
-        while (recentRequests.peekFirst()?.let { now - it > REQUEST_WINDOW_MS } == true) {
-            recentRequests.removeFirst()
-        }
-        if (recentRequests.size >= MAX_REQUESTS_IN_WINDOW) {
-            disableForSafety("LauncherX and Rabbit TV appear to be cycling")
+    /** Without tiles, says why: nothing installed, or everything hidden (and where to show apps again). */
+    private fun showWhyEmpty(arranged: ArrangedApps) {
+        if (page == Page.APPS) {
+            empty.text = getString(R.string.home_no_apps)
+            empty.visibility = if (arranged.shown.isEmpty() && arranged.hidden.isEmpty()) View.VISIBLE else View.GONE
             return
         }
-        recentRequests.addLast(now)
-        pendingRequestAt = now
+        if (arranged.shown.isNotEmpty()) {
+            empty.visibility = View.GONE
+            return
+        }
+        empty.text = if (arranged.hidden.isEmpty()) getString(R.string.home_no_apps) else getString(R.string.home_all_hidden)
+        empty.visibility = View.VISIBLE
+    }
 
+    private fun open(app: InstalledApp) {
+        val intent = Intent(Intent.ACTION_MAIN)
+            .addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER)
+            .setClassName(app.launchable.packageName, app.launchable.activityName)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
         try {
-            startActivity(
-                Intent(this, HomeActivity::class.java).addFlags(
-                    Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP,
-                ),
-            )
-            // Android may silently reject a background Activity start; check actual onResume.
-            mainHandler.postDelayed(verifyRequest, VERIFY_DELAY_MS)
-        } catch (exception: RuntimeException) {
-            pendingRequestAt = 0L
-            Log.w(TAG, "Rabbit TV launch request failed", exception)
-            recordFailedAttempt()
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            refresh()   // uninstalled since the tiles were read: drop its tile
         }
     }
 
-    private fun recordFailedAttempt() {
-        if (!preferences.getBoolean(HomeOverridePreferences.KEY_ENABLED, false)) return
-        val now = System.currentTimeMillis()
-        val previousAt = preferences.getLong(HomeOverridePreferences.KEY_LAST_FAILURE_AT, 0L)
-        val previousCount = if (now >= previousAt && now - previousAt <= FAILURE_WINDOW_MS) {
-            preferences.getInt(HomeOverridePreferences.KEY_FAILED_ATTEMPTS, 0)
-        } else {
-            0
+    private fun openSettings() {
+        startActivity(Intent(this, SettingsActivity::class.java))
+    }
+
+    // On Apps, Menu toggles the focused app's Home pin; elsewhere it opens settings. On release,
+    // and only for a press that started here: not the end of a press that closed something else.
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode != KeyEvent.KEYCODE_MENU) return super.onKeyDown(keyCode, event)
+        event.startTracking()
+        return true
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode != KeyEvent.KEYCODE_MENU) return super.onKeyUp(keyCode, event)
+        if (event.isTracking && !event.isCanceled) {
+            val focusedApp = (tiles.focusedChild as? AppTileView)?.takeIf { it.hasFocus() }?.app
+            if (page == Page.APPS && focusedApp != null) toggleFavorite(focusedApp)
+            else openSettings()
         }
-        val count = previousCount + 1
-        preferences.edit()
-            .putInt(HomeOverridePreferences.KEY_FAILED_ATTEMPTS, count)
-            .putLong(HomeOverridePreferences.KEY_LAST_FAILURE_AT, now)
-            .apply()
-        if (count >= MAX_FAILED_ATTEMPTS) {
-            disableForSafety("Activity did not reach foreground after $count requests")
-        }
+        return true
     }
 
-    private fun disableForSafety(reason: String) {
-        preferences.edit()
-            .putBoolean(HomeOverridePreferences.KEY_ENABLED, false)
-            .putBoolean(HomeOverridePreferences.KEY_SAFETY_STOP, true)
-            .apply()
-        recentRequests.clear()
-        mainHandler.removeCallbacks(verifyRequest)
-        pendingRequestAt = 0L
-        Log.w(TAG, "Home override disabled for safety: $reason")
-    }
-
-    override fun onInterrupt() = Unit
-
-    override fun onDestroy() {
-        mainHandler.removeCallbacks(verifyRequest)
-        pendingRequestAt = 0L
-        super.onDestroy()
-    }
-
-    private companion object {
-        const val TAG = "RabbitHomeOverride"
-        const val REQUEST_COOLDOWN_MS = 400L
-        const val VERIFY_DELAY_MS = 1_000L
-        const val MAX_FAILED_ATTEMPTS = 3
-        const val FAILURE_WINDOW_MS = 90_000L
-        const val REQUEST_WINDOW_MS = 30_000L
-        const val MAX_REQUESTS_IN_WINDOW = 6
-    }
-}
-
-/** In-process acknowledgement; automatically resets across process/device restarts. */
-internal object HomeOverrideRuntime {
-    @Volatile var lastHomeResumedAt: Long = 0L
+    // Back on Android 15 (API 35) and older; onCreate handles Android 16, which lint doesn't see.
+    // Deprecated, but its replacements need AndroidX (OnBackPressedCallback) or API 33
+    // (OnBackInvokedCallback). Doesn't call super, which would close the home screen.
+    @SuppressLint("GestureBackNavigation")
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() = arrange.back()
 }
