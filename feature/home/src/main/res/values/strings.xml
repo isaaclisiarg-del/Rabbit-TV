@@ -30,4 +30,6 @@
     <!-- The same, while a new wallpaper saved in the background editor is drawn, which the user
          left before it was done: as that editor says it (settings_background_applying). -->
     <string name="home_wallpaper_saving">Processing background…</string>
+    <string name="rabbit_home_override_service_name">Rabbit TV · Sustitución de pantalla de inicio</string>
+    <string name="rabbit_home_override_service_description">Observa cambios de ventana de Google TV Home para abrir Rabbit TV cuando activás esta opción. No lee contenido de ventanas.</string>
 </resources>
