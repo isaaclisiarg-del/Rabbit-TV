@@ -1,0 +1,31 @@
+<resources>
+    <string name="settings_rabbit_connect">Rabbit Connect</string>
+    <string name="rabbit_connect_title">Rabbit Connect</string>
+    <string name="rabbit_connect_description">Recibe avisos cifrados de Rabbit Sentinel en una ventana discreta sobre otras aplicaciones. El código temporal se introduce en el teléfono.</string>
+    <string name="rabbit_connect_enable">Activar receptor</string>
+    <string name="rabbit_connect_status">Estado: %1$s</string>
+    <string name="rabbit_connect_ip">IP local: %1$s · puerto %2$d</string>
+    <string name="rabbit_connect_code">Código temporal: %1$s</string>
+    <string name="rabbit_connect_accessibility">Configurar superposición de Rabbit TV</string>
+    <string name="rabbit_connect_overlay_permission">Permitir superposición de Rabbit TV</string>
+    <string name="rabbit_connect_test">Probar notificación</string>
+    <string name="rabbit_connect_revoke">Desvincular teléfono</string>
+    <string name="rabbit_connect_overlay_ready">La superposición de otras apps está permitida.</string>
+    <string name="rabbit_connect_test_sent">Prueba enviada a la superposición de Rabbit TV.</string>
+    <string name="rabbit_connect_revoked">Teléfono desvinculado. Se generará un código nuevo.</string>
+    <string name="rabbit_connect_service_error">Android no permitió iniciar el receptor.</string>
+    <string name="rabbit_connect_listening">Receptor escuchando</string>
+    <string name="rabbit_connect_waiting_pair">Esperando la primera vinculación</string>
+    <string name="rabbit_connect_connected">Teléfono conectado</string>
+    <string name="rabbit_connect_authenticating">Autenticando teléfono</string>
+    <string name="rabbit_connect_no_network">Conectá la TV a Wi-Fi</string>
+    <string name="rabbit_connect_overlay_unavailable">Falta permiso para mostrar la superposición</string>
+    <string name="rabbit_connect_test_ready">Aviso de prueba mostrado</string>
+    <string name="rabbit_connect_disabled">Desactivado</string>
+    <string name="rabbit_connect_stopped">Detenido</string>
+    <string name="rabbit_connect_error">Error de conexión</string>
+    <string name="rabbit_connect_starting">Iniciando</string>
+    <string name="rabbit_connect_no_ip">No disponible</string>
+    <string name="rabbit_connect_paired">Teléfono vinculado</string>
+    <string name="rabbit_connect_code_refreshing">Generando código…</string>
+</resources>

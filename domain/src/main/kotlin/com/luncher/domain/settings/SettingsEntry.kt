@@ -15,4 +15,7 @@ sealed interface SettingsEntry {
 
     /** Opens the device's own settings app. */
     data object SystemSettings : SettingsEntry
+
+    /** Opens the local notification receiver and pairing controls. */
+    data object RabbitConnect : SettingsEntry
 }

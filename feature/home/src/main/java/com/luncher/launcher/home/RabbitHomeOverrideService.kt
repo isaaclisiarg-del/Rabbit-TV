@@ -28,6 +28,11 @@ class RabbitHomeOverrideService : AccessibilityService() {
     private var lastRequestAt = 0L
     private var pendingRequestAt = 0L
 
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        RabbitConnectOverlay.attach(this)
+    }
+
     private val verifyRequest = Runnable {
         val requestedAt = pendingRequestAt
         pendingRequestAt = 0L
@@ -121,6 +126,7 @@ class RabbitHomeOverrideService : AccessibilityService() {
     override fun onDestroy() {
         mainHandler.removeCallbacks(verifyRequest)
         pendingRequestAt = 0L
+        RabbitConnectOverlay.detach(this)
         super.onDestroy()
     }
 

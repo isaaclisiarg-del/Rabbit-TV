@@ -16,6 +16,11 @@
     <application android:supportsRtl="true">
 
         <activity
+            android:name=".RabbitConnectSettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Luncher.Settings.Panel" />
+
+        <activity
             android:name=".SystemSettingsActivity"
             android:exported="false"
             android:launchMode="singleTop"

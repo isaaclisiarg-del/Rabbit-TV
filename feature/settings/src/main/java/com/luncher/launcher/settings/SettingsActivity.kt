@@ -23,7 +23,7 @@ class SettingsActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
         entries = findViewById(R.id.settings_entries)
-        show(listOf(SettingsEntry.Appearance, SettingsEntry.SystemSettings))
+        show(listOf(SettingsEntry.Appearance, SettingsEntry.RabbitConnect, SettingsEntry.SystemSettings))
         // The entries scroll on a screen too short for them all.
         val scroll = findViewById<View>(R.id.settings_entries_scroll)
         scroll.layoutParams.height = 0
@@ -49,12 +49,14 @@ class SettingsActivity : Activity() {
         SettingsEntry.HideApps -> R.string.settings_hide_apps
         SettingsEntry.Appearance -> R.string.settings_appearance
         SettingsEntry.SystemSettings -> R.string.settings_system
+        SettingsEntry.RabbitConnect -> R.string.settings_rabbit_connect
     }
 
     private fun open(entry: SettingsEntry) = when (entry) {
         SettingsEntry.HideApps -> openOwnPanel(Intent(this, HideAppsActivity::class.java))
         SettingsEntry.Appearance -> openOwnPanel(Intent(this, AppearanceActivity::class.java))
         SettingsEntry.SystemSettings -> openOwnPanel(Intent(this, SystemSettingsActivity::class.java))
+        SettingsEntry.RabbitConnect -> openOwnPanel(Intent(this, RabbitConnectSettingsActivity::class.java))
     }
 
     /**
