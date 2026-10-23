@@ -4,7 +4,7 @@
 
 Rabbit TV es un launcher ligero para Android TV y Google TV, pensado para control remoto. Reutiliza Luncher como base Android nativa y adapta su identidad y experiencia a Rabbit TV. El objetivo es ofrecer un inicio limpio que dé acceso rápido a las apps elegidas, sin anuncios, feed ni recomendaciones.
 
-Esta especificación fija el alcance de producto para la primera versión funcional. Los puntos que necesitan una decisión o evidencia del dispositivo están marcados como pendientes; no deben leerse como funciones ya implementadas.
+Esta especificación recoge los objetivos iniciales y decisiones de producto. **Actualización 23/10/2026:** el usuario confirma que Rabbit TV ya fue compilada e instalada en su TV y que Rabbit Connect mostró notificaciones correctamente durante el partido del 22/10. Persiste un fallo esporádico de Home, que a veces abre Google TV Home. Para estado actual y pendientes, ver la [bitácora](BITACORA-2026-10-22.md). Los criterios restantes son verificaciones pendientes, no afirmaciones de que nada está implementado.
 
 ## Usuarios y contexto
 
@@ -60,18 +60,18 @@ Al cambiar entre destinos, el foco inicial y la ruta de Atrás deben ser predeci
 
 ## Fuera del alcance inicial
 
-Reproductor, agregador de streaming, gestión de cuentas, recomendaciones, anuncios, control remoto por teléfono, sincronización en nube y servicio residente. No modificar firmware, permisos de sistema, servicios Google o launcher del fabricante. No convertir Rabbit TV en launcher predeterminado sin prueba de recuperación reversible y autorización expresa posterior.
+Reproductor, agregador de streaming, gestión de cuentas, recomendaciones, anuncios, control remoto por teléfono y sincronización en nube. **Ampliación implementada:** Rabbit Connect ofrece recepción local opcional de notificaciones mediante servicio de primer plano; no es un servicio genérico de telemetría. No modificar firmware, permisos de sistema, servicios Google o launcher del fabricante. No convertir Rabbit TV en launcher predeterminado sin prueba de recuperación reversible y autorización expresa posterior.
 
 ## Privacidad y permisos
 
-- Pedir solo permisos imprescindibles para mostrar apps y seleccionar fondo.
-- No recopilar historial de uso, credenciales, telemetría ni datos personales en la primera versión.
-- No ejecutar trabajo permanente en segundo plano.
+- Solicitar permisos solo para la función usada: apps y fondos; Rabbit Connect requiere conectividad local y superposición/accesibilidad, según el método de presentación autorizado.
+- No recopilar historial de uso ni telemetría general. Rabbit Connect presenta brevemente el contenido de notificaciones que el usuario ha autorizado en Sentinel, por lo que debe mantener protección de datos sensibles y evitar registros persistentes de mensajes.
+- No añadir trabajo permanente ajeno a funciones activadas. Rabbit Connect mantiene un servicio de primer plano únicamente cuando se habilita el receptor.
 - Documentar cualquier permiso que se descubra como necesario antes de añadirlo.
 
 ## Criterios de aceptación de la primera versión funcional
 
-- El APK debug compila y abre; esto está pendiente de comprobar para la rama actual.
+- APK compilada en Ubuntu, instalada y abierta en la TV, según confirmación del usuario (22/10); la rama y hash del APK instalado aún requieren cotejo.
 - Android reconoce la aplicación como app Leanback y como opción Home, sin configurarla automáticamente como launcher por defecto.
 - Todas las funciones visibles se recorren con control remoto.
 - Inicio muestra solo favoritas elegidas y disponibles; Apps abre aplicaciones instaladas.
@@ -82,7 +82,7 @@ Reproductor, agregador de streaming, gestión de cuentas, recomendaciones, anunc
 
 ## Decisiones pendientes
 
-- Modelo, versión Android/firmware, resolución, Hz, almacenamiento libre y disponibilidad de ADB de la TV.
+- Completar la ficha de hardware y mediciones del dispositivo real (el acceso ADB y Android TV/Google TV ya se han utilizado).
 - Confirmar apps iniciales, comportamiento de elementos ausentes y orden.
 - Adjuntar/ubicar el fondo final aprobado.
 - Identificar fuente de la lámina Rabbit Sentinel V2 y confirmar permiso/licencia para distribuir sus redibujos.
