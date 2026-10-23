@@ -1,6 +1,6 @@
 # Rabbit TV — checklist de validación en TV
 
-Este checklist es para una sesión futura, con el usuario presente y después de revisar el APK. **No usar para instalar ahora ni cambiar el launcher predeterminado.** Hasta entonces, las tareas de hardware quedan pendientes.
+> **Estado actualizado el 23/10/2026:** el usuario confirma que Rabbit TV se compiló en Ubuntu, se instaló en su TV y recibió correctamente notificaciones de Rabbit Sentinel durante el partido del 22/10. El retorno de Home sigue siendo intermitente: ocasionalmente abre Google TV Home. Las casillas de este checklist son verificaciones *detalladas* aún sin evidencia individual, no indican que la aplicación siga sin instalarse. Antes de cambiar Home o servicios del fabricante, conservar un camino de recuperación reversible. Ver [bitácora](BITACORA-2026-10-22.md).
 
 ## 1. Identificar el dispositivo
 
@@ -80,11 +80,11 @@ Este checklist es para una sesión futura, con el usuario presente y después de
 - [ ] Probar Home desde YouTube, Spotify y otras apps; confirmar que no se interrumpe la reproducción ni se redirigen ajustes o diálogos.
 - [ ] Repetir después de reiniciar; confirmar Chromecast, Wi-Fi, HDMI y el control remoto.
 - [ ] Pulsar «Restaurar inicio original» y seleccionar explícitamente Google TV Home si aparece el selector de Home. En algunos firmwares se abre Ajustes generales; la app no puede cambiar sola el HOME predeterminado.
-- [ ] Verificar que el servicio detiene automáticamente la redirección si tres aperturas no consiguen activar Rabbit TV en 90 s, o si detecta seis redirecciones en 30 s. Comprobar el aviso de parada de seguridad y la recuperación manual.
+- [ ] Reevaluar la nueva protección antibucles (tres intentos fallidos en 90 s o seis redirecciones en 30 s): el usuario percibe un posible empeoramiento de Home. Medir/registrar fallos y, si procede, revertir o ajustar con recuperación segura; no se ha cambiado este código.
 - [ ] Verificar desde los ajustes de accesibilidad que «Configurar» abre las opciones de Rabbit TV.
 - [ ] Confirmar que LauncherX existe como `com.google.android.apps.tv.launcherx`; si el modelo usa otro paquete, la opción se deshabilita sin interceptar otras apps.
 - [ ] Mantener habilitados LauncherX (com.google.android.apps.tv.launcherx), SetupWraith (com.google.android.tungsten.setupwraith) y Google MediaShell (com.google.android.apps.mediashell).
-- [ ] No declarar la sustitución operativa sin medirla en el televisor. El inicio de una Activity desde un servicio en segundo plano está sujeto a las restricciones y excepciones de Android; el resultado puede variar según el firmware. Si Rabbit TV no pasa al frente, registrar el mensaje de ActivityTaskManager/Logcat y dejar la sustitución desactivada.
+- [ ] No declarar la sustitución totalmente estable hasta medirla en el televisor: hay uso real positivo, pero siguen fallos esporádicos. El inicio de una Activity desde un servicio en segundo plano está sujeto a las restricciones y excepciones de Android; el resultado puede variar según el firmware. Si Rabbit TV no pasa al frente, registrar el mensaje de ActivityTaskManager/Logcat y dejar la sustitución desactivada.
 
 ## 9. Recuperación y cierre
 
