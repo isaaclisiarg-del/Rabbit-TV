@@ -1,5 +1,7 @@
 # Rabbit TV 🐇
 
+> **Pendientes registrados el 24/10/2026:** [bitácora 24/10](docs/BITACORA-2026-10-24.md): avisos Rabbit Connect ligeramente más pequeños/translúcidos y Cine más discreto, accesos HDMI y reparación Home intermitente. **Solo PLANIFICADO**; los modos Normal/Cine/Invitado se implementarán prioritariamente en Rabbit Sentinel, sin revincular ni enviar avisos acumulados.
+
 Launcher ligero para Android TV / Google TV, con estética Lomiri Rabbit y navegación con control remoto.
 
 > Estado actualizado el **23/10/2026**: Rabbit TV fue compilado en Ubuntu e instalado en la TV, según confirmación del usuario. Rabbit Connect mostró avisos de Sentinel durante el partido de Estudiantes del 22/10; el botón Home funciona en general, pero esporádicamente vuelve a Google TV Home. Ver [bitácora del 22/10](docs/BITACORA-2026-10-22.md).
